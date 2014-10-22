@@ -147,6 +147,14 @@ route('/') { |request, response| response.body &lt;&lt; "Help Me!" }
 
 <p>Anorexic assummes all simple string routes to be RESTful routes ( <code>"/user" == "/user/(:id)"</code> ).</p>
 
+<pre><code>require 'anorexic'
+listen
+
+# this route demos a route for listing/showing posts,
+# with or without revision numbers or page-control....
+route "/post/(:id)/(:revision){[\d]*}/(:page_number)", Anorexic::StubController
+</code></pre>
+
 <p>Anorexic accepts Regexp routes as well as string and magic routes and defines a short cut for a catch-all route:</p>
 
 <pre><code>require 'anorexic'
@@ -163,6 +171,40 @@ route(/^\/[\D]+$/) { |req, res| res.body &lt;&lt; "Where're my numbers :(" }
 
 # this route catches everything else.
 route('*') { |request, response| response.body &lt;&lt; "Gotcha!" }
+</code></pre>
+
+<h2>
+<a name="anorexic-virtual-hosts" class="anchor" href="#anorexic-virtual-hosts"><span class="octicon octicon-link"></span></a>Anorexic Virtual Hosts</h2>
+
+<p>The Anorexic <code>listen</code> command can be used to create virtual hosts for the same service, by supplying a port that is already assigned:</p>
+
+<pre><code>require 'anorexic'
+
+# sets a virtuls host on localhost 1 (saving the server object to use it's port)
+server = listen host: 'localhost'
+
+route('/welcome') { |req, res| res.body &lt;&lt; "Welcome to Localhost." }
+
+# sets a virtuls host on admin.localhost1
+# (using the same port creates a virtual host instead of a new service)
+admin_host = listen server.port, host: '127.0.0.1'
+
+route('/welcome') { |req, res| res.body &lt;&lt; "Administrate Localhost." }
+
+# sets a global router for the same service
+# (for any host NOT localhost1 or admin.localhost1 )
+listen server.port
+route('/welcome') { |req, res| res.body &lt;&lt; "Welcome to the global namespace" }
+
+# virtual hosts support shared routes, just like real services
+shared_route('/people') { |req, res| res.body &lt;&lt; "we made this!" }
+
+# it's possible to directly add routes to an "older" host, if you saved it.
+# (this works also as live route adding)
+admin_host.add_route('/secret') { |req, res| res.body &lt;&lt; "Shhhh!" }
+
+# shared routes can be catch-all (careful).
+shared_route('*') { |req, res| res.body &lt;&lt; "Gotcha!" }
 </code></pre>
 
 <h2>
