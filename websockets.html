@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>AnoreXic by boazsegev</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>AnoreXic</h1>
+        <h2>A small, pure Ruby, web app DSL/framework... so small - it&#39;s anorexic!</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/boazsegev/anorexic/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/boazsegev/anorexic/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/boazsegev/anorexic" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+<h1>The Ruby Chatroom - Websockets with Anorexic</h1>
+
+<p>Using Anorexic, anyone can easily create a web application that has advanced features (such as websockets, data pushing and callbacks).</p>
+
+<p>The chatroom application is a great way to introduce these advanced features and the Anorexic framework.</p>
+
+<h3>Coding is the way to discover Anorexic</h3>
+
+<p>When I was little, my father tried to teach me to swim&#8230; in other words, he throw me in the pool and let the chips fall where they may.</p>
+
+<p>I was on the verge of drowning for the first few weeks, but looking back I am very thankful for the experience. You can hardly learn anything about swimming without entering the pool&#8230;</p>
+
+<p>So let&#8217;s start with getting wet - writing the code - and then maybe refine our understanding a bit by taking the code apart.</p>
+
+<h3>Before we start - installing Anorexic</h3>
+
+<p>I assume that you have already <a href="https://www.ruby-lang.org/en/installation/">installed Ruby with RubyGems</a>, if not, do it now. I recommend <a href="http://rvm.io/rvm/install">installing Ruby and RubyGems using rvm</a>.</p>
+
+<p>once ruby and rubygems are installed, it&#8217;s time to install Anorexic. in your terminal window, run:</p>
+
+<pre><code>$ gem install anorexic
+</code></pre>
+
+<p>depending on your system and setup, you might need to enter a password or use the sudo command to install new gems:</p>
+
+<pre><code>$ sudo gem install anorexic
+</code></pre>
+
+<p>That&#8217;s it.</p>
+
+<h2>The Ruby Code (chatroom server)</h2>
+
+<p>We can create an Anorexic application using the <code>$ anorexic new myapp</code> command, but that&#8217;s too easy - we want it hardcore.</p>
+
+<p>Let&#8217;s create an application folder called <code>mychat</code> and save our code in a file called <code>mychat.rb</code> in our application folder.</p>
+
+<p>The first bit of code tells bash to run this file as a ruby file, just in case we want to make this file into an executable (for us Unix and BSD people).</p>
+
+<pre><code class="ruby">#!/usr/bin/env ruby
+# encoding: UTF-8
+</code></pre>
+
+<p>This next bit of code imports Anorexic into our program and allows us to use the Anorexic framework in our application.</p>
+
+<pre><code class="ruby">require 'anorexic'
+</code></pre>
+
+<p>Then there is the part where we define the <code>ChatController</code> class&#8230; We&#8217;ll talk about this piece of code later on. for now, I will just point out that this class doesn&#8217;t inherit any special controller class.</p>
+
+<p>Let&#8217;s write a short stub which we will fill in later.</p>
+
+<pre><code class="ruby">class ChatController
+# ...we'll fill this in later...
+end
+</code></pre>
+
+<p>Next, we set find the root folder where our application exists - we will use this to tell anorexic where our html files, templates and assets are stored (once we write any of them).
+<code>ruby
+# Using pathname extentions for setting public folder
+require 'pathname'
+# set up the Root object for easy path access.
+Root = Pathname.new(File.dirname(__FILE__)).expand_path
+</code></p>
+
+<p>Then, we set up the Anorexic service&#8217;s parameters - parameters which Anorexic will use to create our main service and host.</p>
+
+<p>A service, in this case, is realy just a nice word for the Anorexic server (which might have a number of services or hosts). We will have only one service and one host, so it&#8217;s very easy to set up.</p>
+
+<p>As you can see, some options are there for later, but are disabled for now.</p>
+
+<ul>
+<li><strong>root</strong>: this option defines the folder from which Anorexic should serve static files (html files, images etc&#8217;). We will not be serving any static files at the moment, so this option is disabled.</li>
+<li><strong>assets</strong>: this option tells anorexic where to look for asset files that might need rendering - such as Sass and Coffee-Script files&#8230; We will not be using these features either, so that&#8217;s out as well.</li>
+<li><strong>assets_public</strong>: this option tells anorexic which route is the one where assets are attached to (it defaults to &#8216;/assets&#8217;). We aren&#8217;t using assets, so that&#8217;s really not important.</li>
+<li><strong><em>templates</em></strong>: this option tells Anorexic where to look for template files (.haml / .erb files). Since we will use a template file for our HTML, let&#8217;s go ahead and create a subfolder called <code>views</code> and set that as our templates source folder.</li>
+<li><strong>ssl</strong>: this option, if set to true, will make our service into an SSL/TSL encrypted service (as well as our websocket service)&#8230; we can leave this off for now - it&#8217;s actually hardly ever used since it&#8217;s usually better to leave that to our production server.</li>
+</ul>
+
+<pre><code class="ruby">service_options = {
+    # root: Root.join('public').to_s,
+    # assets: Root.join('assets').to_s,
+    # assets_public: '/',
+    templates: Root.join('views').to_s,
+    ssl: false
+}
+</code></pre>
+
+<p>Next we call the <code>listen</code> command - this command actually creates the service.</p>
+
+<p>The port anorexic uses by default is 3000 <a href="http://localhost:3000/">http://localhost:3000/</a>. By not defining a port, we allowed ourselves to either use the default port (3000) or decide the port when we run our application (i.e. <code>./mychat.rb -p 8080</code>).</p>
+
+<pre><code class="ruby">listen service_options
+</code></pre>
+
+<p>(if you want to force a specific port, i.e. 80, write <code>listen 80, service_options</code> - but make sure you are allowed to use this port)</p>
+
+<p>Last, but not least, we tell Anorexic to connect the root of our web application to our ChatController - in other words, make sure the root <em>path</em> (&#8216;/&#8217;) is connected to the ChatController class.</p>
+
+<pre><code class="ruby">route '/', ChatController
+</code></pre>
+
+<p>Anorexic controller classes are like virtual folders with special support for RESTful methods (<code>index</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>), HTTP filters and helpers (<code>before</code>, <code>after</code>, <code>redirect_to</code>, <code>send_data</code>), WebSockets methods (<code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>), and WebSockets filters and helpers (<code>pre-connect</code>, <code>broadcast</code>, <code>collect</code>).</p>
+
+<p>Anorexic uses a cummon special parameter called &#8216;id&#8217; to help with all this magic&#8230; if we don&#8217;t define this parameter ourselves, Anorexic will try to append this parameter to the end our route&#8217;s path. So, actually, our route looks like this:</p>
+
+<pre><code class="ruby">route '/(:id)', ChatController
+</code></pre>
+
+<h3>The Controller - serving regular data (HTTP)</h3>
+
+<p>Let&#8217;s take a deeper look into our controller and start filling it in&#8230;</p>
+
+<h4>serving the main html template file (index)</h4>
+
+<p>The first thing we want our controller to do, is to serve the HTML template we will write later on. We will use a template so we can add stuff later, maybe.</p>
+
+<p>Since controllers can work like virtual folders with support for RESTful methods, we can define an <code>index</code> method to do this simple task:</p>
+
+<pre><code class="ruby">def index
+    #... later
+end
+</code></pre>
+
+<p>Anorexic has a really easy method called <code>render</code> that creates (and caches) a rendering object with our template file&#8217;s content and returns a String of our rendered template.</p>
+
+<p>Lets fill in our <code>index</code> method:</p>
+
+<pre><code class="ruby">class ChatController
+    def index
+        response['content-type'] = 'text/html'
+        response &lt;&lt; render(:chat)
+        true
+    end
+end
+</code></pre>
+
+<p>Actually, some tasks are so cummon - like sending text in our HTTP response - that Anorexic can helps us along. If our method should return a String object, that String will be appended to the response.</p>
+
+<p>Let&#8217;s rewrite our <code>index</code> method to make it cleaner:</p>
+
+<pre><code class="ruby">class ChatController
+    def index
+        response['content-type'] = 'text/html'
+        render(:chat)
+    end
+end
+</code></pre>
+
+<p>When someone will visit the root of our application (which is also the &#8216;<em>root</em>&#8217; of our controller), they will get the our ChatController#index method. </p>
+
+<p>We just need to remember to create a &#8216;chat&#8217; template file (<code>chat.html.erb</code> or <code>chat.html.haml</code>)&#8230; but that&#8217;s for later.</p>
+
+<h4>Telling people that we made this cool app!</h4>
+
+<p>there is a secret web convention that allows developers to <em>sign</em> their work by answering the <code>/people</code> path with plain text and the names of the people who built the site&#8230;</p>
+
+<p>With Anorexic, that&#8217;s super easy.</p>
+
+<p>Since out ChatController is at the root of ou application, let&#8217;s add a <code>people</code> method to our ChatController:</p>
+
+<pre><code class="ruby">def people
+    &quot;I wrote this app :)&quot;
+end
+</code></pre>
+
+<p>Anorexic uses the &#8216;id&#8217; parameter to recognize special paths as well as for it&#8217;s RESTful support. Now, anyone visiting &#8216;/people&#8217; will reach our ChatController#people method.</p>
+
+<p>Just like we already discovered, returning a String object (the last line of the <code>people</code> method is a String) automatically appends this string to our HTTP response - cool :)</p>
+
+<h3>The Controller - live input and pushing data (WebSockets)</h3>
+
+<p>We are building an advanced application here - this is <em>not</em> another &#8216;hello world&#8217; - lets start exploring the advanced stuff.</p>
+
+<h4>Supporting WebSockets</h4>
+
+<p>To accept WebSockets connections, our controller must define an <code>on_message(data)</code> method.</p>
+
+<p>Anorexic will recognize this method and allow websocket connections for our controller&#8217;s path (which is at the root of our application).</p>
+
+<p>We will also want to transport some data between the browser (the client) and our server. To do this, we will use <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>, which is really easy to use and is the same format used by socket.io.</p>
+
+<p>We will start by formatting our data to JSON (or closing the connection if someone is sending corrupt data):</p>
+
+<pre><code class="ruby">def on_message data
+    begin
+        data = JSON.parse data
+    rescue Exception =&gt; e
+        response &lt;&lt; {event: :error, message: &quot;Unknown Error&quot;}.to_json
+        response.close
+        return false
+    end
+end
+</code></pre>
+
+<h4>Pausing for software design - the Chatroom challange</h4>
+
+<p>To design a chatroom we will need a few things:</p>
+
+<ol>
+<li>We will need to force people identify themselves by choosing nicknames - to do this we will define the <code>on_connect</code> method to refuse any connections that don&#8217;t have a nickname.</li>
+<li>We will want to make sure these nicknames are unique and don&#8217;t give a wrong sense of authority (nicknames such as &#8216;admin&#8217; should be forbidden) - for now, we will simply collect the nicknames from all the other active connections using the <code>collect</code> method and use that in our <code>on_connect</code> method.</li>
+<li>We will want to push messages we recieve to all the other chatroom members - to do this we will use the <code>broadcast</code> method in our <code>on_message(data)</code> method.</li>
+<li>We will also want to tell people when someone left the chatroom - to do this we can define an <code>on_disconnect</code> method and use the <code>broadcast</code> method in there.</li>
+</ol>
+
+<p>We can use the :id parameter to collect the nickname.</p>
+
+<p>the :id is an automatic parameter that Anorexic appended to our path like already explained and it&#8217;s perfect for our simple needs.</p>
+
+<p>We could probably rewrite our route to something like this: <code>route '/(:id)/(:nickname)', ChatController</code> (or move the <code>/people</code> path out of the controller and use <code>'/(:nickname)'</code>)&#8230; but why work hard when we don&#8217;t need to?</p>
+
+<h4>Broadcasting chat (websocket) messages</h4>
+
+<p>When we get a chat message, with <code>on_message(data)</code>, we will want to broadcast this message to all the <em>other</em> ChatController connections.</p>
+
+<p>Using JSON, our new <code>on_message(data)</code> method can look something like this:</p>
+
+<pre><code class="ruby">def on_message data
+    begin
+        data = JSON.parse data
+    rescue Exception =&gt; e
+        response &lt;&lt; {event: :error, message: &quot;Unknown Error&quot;}.to_json
+        response.close
+        return false
+    end
+    message = {}
+    message[:message] = data[&quot;message&quot;]
+    message[:event] = :chat
+    message[:from] = params[:id]
+    message[:at] = Time.now
+    broadcast :_send_message, message.to_json
+end
+</code></pre>
+
+<p>let&#8217;s write it a bit shorter&#8230; if our code has nothing important to say, it might as well be quick about it.</p>
+
+<pre><code class="ruby">def on_message data
+    begin
+        data = JSON.parse data
+    rescue Exception =&gt; e
+        response &lt;&lt; {event: :error, message: &quot;Unknown Error&quot;}.to_json
+        response.close
+        return false
+    end
+    broadcast :_send_message, {event: :chat, from: params[:id], message: data[&quot;message&quot;], at: Time.now}.to_json
+end
+</code></pre>
+
+<p>Now that the code is shorter, let&#8217;s look at that last line - the one that calls <code>broadcast</code></p>
+
+<p><code>broadcast</code> is an interesing Anorexic feature that allows us to tell all the <em>other</em> connection to run a method. It is totally asynchroneos, so we don&#8217;t wait for it to complete.</p>
+
+<p>Here, we tell all the other websocket instances of our ChatController to run their <code>_send_message(msg)</code> method on their own connections - it even passes a message as an argument&#8230; but wait, we didn&#8217;t write the <code>_send_message(msg)</code> method yet!</p>
+
+<h4>The _send_message method</h4>
+
+<p>Let&#8217;s start with the name - why the underscore at the beginning?</p>
+
+<p>Anorexic knows that sometimes we will want to create public methods that aren&#8217;t available as a path - remember the <code>people</code> method, it was automatically recognized as an HTTP path&#8230;</p>
+
+<p>Anorexic allows us to &#8216;exclude&#8217; some methods from this auto-recogntion. protected methods and methods starting with an underscore (_) aren&#8217;t recognized by the Anorexic router.</p>
+
+<p>Since we want the <code>_send_message</code> to be called by the <code>broadcast</code> method - it must be a public method (otherwise, we will not be able to call it for <em>other</em> connections, only for our own connection).</p>
+
+<p>This will be our <code>_send_message</code> method:</p>
+
+<pre><code class="ruby">def _send_message data
+    response &lt;&lt; data
+end
+</code></pre>
+
+<p>Did you notice the difference between WebSocket responses and HTTP?</p>
+
+<p>In WebSockets, we don&#8217;t automatically send string data (this is safeguard) and we must use the <code>&lt;&lt;</code> method to add data to the response stream.</p>
+
+<h4>Telling people that we left the chatroom</h4>
+
+<p>Another feature we want to put in, is letting people know when someone enters or leaves the chatroom.</p>
+
+<p>Using the <code>broadcast</code> method with the special <code>on_disconnect</code> websocket method, makes telling people we left an easy task&#8230; </p>
+
+<pre><code class="ruby">def on_disconnect
+    message = {event: :chat, from: '', at: Time.now}
+    message[:message] = &quot;#{params[:id]} left the chatroom.&quot;
+    broadcast :_send_message, message.to_json if params[:id]
+end
+</code></pre>
+
+<p>We will only tell people that we left the chatroom if our login was successful - this is why we use the <code>if params[:id]</code> statement - if the login fails, we will set the <code>params[:id]</code> to false.</p>
+
+<p>Let&#8217;s make it a bit shorter?</p>
+
+<pre><code class="ruby">def on_disconnect
+    broadcast :_send_message, {event: :chat, from: '', at: Time.now, message: &quot;#{params[:id]} left the chatroom.&quot;}.to_json if params[:id]
+end
+</code></pre>
+
+<h4>The login process and telling people we&#8217;re here</h4>
+
+<p>If we ever write a real chatroom, our login process will look mch different - but the following process is good enough for now and it has a lot to teach us&#8230;</p>
+
+<p>First, we will ensure the new connection has a nickname (the connection was made to &#8216;/nickname&#8217; rather then the root of our application &#8216;/&#8217;):</p>
+
+<pre><code class="ruby">def on_connect
+    if params[:id].nil?
+        response &lt;&lt; {event: :error, from: :system, at: Time.now, message: &quot;Error: cannot connect without a nickname!&quot;}.to_json
+        response.close
+        return false
+    end
+end
+</code></pre>
+
+<p>Easy.</p>
+
+<p>Next, we will ask everybody else who is connected to tell us their nicknames - we will test the new nickname against this list and make sure the nickname is unique.</p>
+
+<p>We will also add some reserved names to this list, to make sure nobody impersonates a system administrator&#8230; let&#8217;s add this code to our <code>on_connect</code> method:</p>
+
+<pre><code class="ruby">    message = {from: '', at: Time.now}
+    r = collect(:_ask_nickname)
+    if ((r.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
+        message[:event] = :error
+        message[:message] = &quot;The nickname '#{params[:id]}' is already taken.&quot;
+        response &lt;&lt; message.to_json
+        params[:id] = false
+        response.close
+        return
+    end
+</code></pre>
+
+<p>Hmm.. <strong>collect</strong>? what is the <code>collect</code> method? - well, this is a little bit of more Anorexic magic that allows us to ask and collect information from all the <em>other</em> active connections. This method returns an array of all the responses.</p>
+
+<p>We will use <code>collect</code> to get an array of all the connected nicknames - we will write the <code>_ask_nickname</code> method later.</p>
+
+<p>&#8230;</p>
+
+<p>Then, if all is good, we will welcome the new connection to our chatroom. We will also tell the new guest who is already connected and broadcast their arrivale to everybody else&#8230;:</p>
+
+<pre><code class="ruby">        message = {from: '', at: Time.now}
+        message[:event] = :chat
+        if r.empty?
+            message[:message] = &quot;Welcome! You're the first one here.&quot;
+        else
+            message[:message] = &quot;Welcome! #{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already here.&quot;
+        end
+        response &lt;&lt; message.to_json
+        message[:message] = &quot;#{params[:id]} joined the chatroom.&quot;
+        broadcast :_send_message, message.to_json
+</code></pre>
+
+<p>Let&#8217;s make it just a bit shorter, most of the code ins&#8217;t important enough to worry about readability&#8230; we can compact our <code>if</code> statement to an inline statement like this:</p>
+
+<pre><code class="ruby">        message[:message] = r.empty? ? &quot;You're the first one here.&quot; : &quot;#{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already in the chatroom&quot;
+</code></pre>
+
+<p>This will be our final <code>on_connect</code> method:</p>
+
+<pre><code class="ruby">def on_connect
+    if params[:id].nil?
+        response &lt;&lt; {event: :error, from: :system, at: Time.now, message: &quot;Error: cannot connect without a nickname!&quot;}.to_json
+        response.close
+        return false
+    end
+    message = {from: '', at: Time.now}
+    r = collect(:_ask_nickname)
+    if ((r.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
+        message[:event] = :error
+        message[:message] = &quot;The nickname '#{params[:id]}' is already taken.&quot;
+        response &lt;&lt; message.to_json
+        params[:id] = false
+        response.close
+        return
+    end
+    message[:event] = :chat
+    message[:message] = r.empty? ? &quot;You're the first one here.&quot; : &quot;#{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already in the chatroom&quot;
+    response &lt;&lt; message.to_json
+    message[:message] = &quot;#{params[:id]} joined the chatroom.&quot;
+    broadcast :_send_message, message.to_json
+end
+</code></pre>
+
+<h4>The _ask_nickname method</h4>
+
+<p>Just like the <code>_send_message</code> method, this method&#8217;s name starts with an underscore to make sure it is ignored by the Anorexic router.</p>
+
+<p>Since this message is used by the <code>collect</code> method to collect information (which will block our code), it&#8217;s very important that this method will be short and fast - it might run hundreds of times (or more), depending how many people are connected to our chatroom&#8230;</p>
+
+<pre><code class="ruby">    def _ask_nickname
+        return params[:id]
+    end
+</code></pre>
+
+<h3>The Complete Ruby Code &lt; (less then) 75 lines</h3>
+
+<p>This is our complete <code>mychat.rb</code> Ruby application code:</p>
+
+<pre><code class="ruby">#!/usr/bin/env ruby
+# encoding: UTF-8
+
+require 'anorexic'
+
+class ChatController
+    def index
+        response['content-type'] = 'text/html'
+        render(:chat)
+    end
+    def people
+        &quot;I wrote this app :)&quot;
+    end
+    def on_message data
+        begin
+            data = JSON.parse data
+        rescue Exception =&gt; e
+            response &lt;&lt; {event: :error, message: &quot;Unknown Error&quot;}.to_json
+            response.close
+            return false
+        end
+        broadcast :_send_message, {event: :chat, from: params[:id], message: data[&quot;message&quot;], at: Time.now}.to_json
+    end
+    def _send_message data
+        response &lt;&lt; data
+    end
+    def on_connect
+        if params[:id].nil?
+            response &lt;&lt; {event: :error, from: :system, at: Time.now, message: &quot;Error: cannot connect without a nickname!&quot;}.to_json
+            response.close
+            return false
+        end
+        message = {from: '', at: Time.now}
+        r = collect(:_ask_nickname)
+        if ((r.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
+            message[:event] = :error
+            message[:message] = &quot;The nickname '#{params[:id]}' is already taken.&quot;
+            response &lt;&lt; message.to_json
+            params[:id] = false
+            response.close
+            return
+        end
+        message[:event] = :chat
+        message[:message] = r.empty? ? &quot;You're the first one here.&quot; : &quot;#{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already in the chatroom&quot;
+        response &lt;&lt; message.to_json
+        message[:message] = &quot;#{params[:id]} joined the chatroom.&quot;
+        broadcast :_send_message, message.to_json
+    end
+
+    def on_disconnect
+        broadcast :_send_message, {event: :chat, from: '', at: Time.now, message: &quot;#{params[:id]} left the chatroom.&quot;}.to_json if params[:id]
+    end
+    def _ask_nickname
+        return params[:id]
+    end
+end
+
+# Using pathname extentions for setting public folder
+require 'pathname'
+# set up the Root object for easy path access.
+Root = Pathname.new(File.dirname(__FILE__)).expand_path
+
+# set up the Anorexic service options
+service_options = {
+    # root: Root.join('public').to_s,
+    # assets: Root.join('assets').to_s,
+    # assets_public: '/',
+    templates: Root.join('views').to_s,
+    ssl: false
+}
+
+listen service_options
+
+# this routes the root of the application ('/') to our ChatController
+route '/', ChatController
+</code></pre>
+
+<h2>The HTML - a web page with websockets</h2>
+
+<p>The <a href="https://www.websocket.org">official websockets page</a> has great info about websockets and some tips about creating web pages with WebSocket features.</p>
+
+<p>Since this isn&#8217;t really a tutorial about HTML, Javascript or CSS, we will make it a very simple web page and explain just a few things about the websocket javascript&#8230;</p>
+
+<p>&#8230;<strong>this is probably the hardest part in the code</strong> (maybe because it isn&#8217;t Ruby).</p>
+
+<p>Let us create a new file, and save it at <code>views/chat.html.erb</code> - this is our template file and Anorexic will find it when we call <code>render :chat</code>.</p>
+
+<p><code>.erb</code> files allow us to write HTML like files with Ruby code inside. We could also use Haml (which has a nicer syntax), but for now we will keep things symple&#8230; so simple, in fact, we will start with no Ruby code inside.</p>
+
+<p>Copy and paste the following into your <code>views/chat.html.erb</code> file - the <code>views</code> folder is the one we defined for the <code>templates</code> in the Anorexic service options - remember?</p>
+
+<p>Anyway, here&#8217;s the HTML code, copy it and I&#8217;ll explain the code in a bit:</p>
+
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+  &lt;meta charset='UTF-8'&gt;
+  &lt;style&gt;
+    html, body {width: 100%; height:100%;}
+    body {font-size: 1.5em; background-color: #eee;}
+    p {padding: 0.2em; margin: 0;}
+    .received { color: #00f;}
+    .sent { color: #80f;}
+    input, #output, #status {font-size: 1em; width: 60%; margin: 0.5em 19%; padding: 0.5em 1%;}
+    input[type=submit] { margin: 0.5em 20%; padding: 0;}
+    #output {height: 60%; overflow: auto; background-color: #fff;}
+    .connected {background-color: #efe;}
+    .disconnected {background-color: #fee;}
+  &lt;/style&gt;
+  &lt;script&gt;
+    var websocket = NaN;
+    var last_msg = NaN;
+    function Connect() {
+        websocket = new WebSocket( (window.location.protocol.indexOf('https') &lt; 0 ? 'ws' : 'wss') + '://' + window.location.hostname + (window.location.port == '' ? '' : (':' + window.location.port) ) + &quot;/&quot; + document.getElementById(&quot;input&quot;).value );
+    }
+    function Init()
+    {
+        Connect()
+        websocket.onopen = function(e) { update_status(); WriteStatus({'message':'Connected :)'})};
+        websocket.onclose = function(e) { websocket = NaN; update_status(); };
+        websocket.onmessage = function(e) {
+            var msg = JSON.parse(e.data)
+            last_msg = msg
+            if(msg.event == 'chat') WriteMessage(msg, 'received')
+            if(msg.event == 'error') WriteStatus(msg)
+        };
+        websocket.onerror = function(e) { websocket = NaN; update_status(); };
+    }
+    function WriteMessage( message, message_type )
+    {
+        if (!message_type) message_type = 'received'
+        var msg = document.createElement(&quot;p&quot;);
+        msg.className = message_type;
+        msg.innerHTML = message.from + &quot;: &quot; + message.message;
+        document.getElementById(&quot;output&quot;).appendChild(msg);
+    }
+    function WriteStatus( message )
+    {
+        document.getElementById(&quot;status&quot;).innerHTML = message.message;
+    }
+    function Send()
+    {
+        var msg = {'event':'chat', 'from':'me', 'message':document.getElementById(&quot;input&quot;).value}
+        WriteMessage(msg, 'sent'); 
+        websocket.send(JSON.stringify(msg));
+    }
+    function update_status()
+    {
+        if(websocket)
+        {
+            document.getElementById(&quot;submit&quot;).value = &quot;Send&quot;
+            document.getElementById(&quot;input&quot;).placeholder = &quot;your message goes here&quot;
+            document.getElementById(&quot;status&quot;).className = &quot;connected&quot;
+        }
+        else
+        {
+            document.getElementById(&quot;submit&quot;).value = &quot;Connect&quot;
+            document.getElementById(&quot;input&quot;).placeholder = &quot;your nickname&quot;
+            document.getElementById(&quot;status&quot;).className = &quot;disconnected&quot;
+            if(last_msg.event != 'error') document.getElementById(&quot;status&quot;).innerHTML = &quot;Please choose your nickname and join in...&quot;
+        }
+    }
+    function on_submit()
+    {
+        if(websocket)
+        {
+            Send()
+        }
+        else
+        {
+            Init()
+        }
+        document.getElementById(&quot;input&quot;).value = &quot;&quot;
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id='status' class='disconnected'&gt;Please choose your nickname and join in...&lt;/div&gt;
+    &lt;div id='output'&gt;&lt;/div&gt;
+    &lt;form onsubmit='on_submit(); return false'&gt;
+        &lt;input id='input' type='text' placeholder='your nickname.' value='' /&gt;
+        &lt;input type='submit' value='Connect' id='submit' /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>Our smart web page has three main components: the CSS (the stuff in the <code>style</code> tag), the Javascript (in the <code>script</code> tag) and the actual HTML.</p>
+
+<p>All the interesting bits are in the Javascript.</p>
+
+<p>The Javascript allows us to request a nickname, send a connection request to &#8216;ws://localhost:3000/nickname&#8217; (where we pick up the nickname using the RESTful &#8216;id&#8217; parameter), and send/recieve chat messages.</p>
+
+<p>The CSS is just a bit of styling so the page doesn&#8217;t look too bad.</p>
+
+<p>The HTML is also very simple. We have one <code>div</code> element called <code>output</code>, one text input, a status bar (on top) and a submit button (with the word &#8216;Send&#8217; / &#8216;Connect&#8217;).</p>
+
+<p>I will go over some of the JavaScript highlights very quickly, as there are a lot of tutorials out there regarding websockets and javascript.</p>
+
+<p>The main javascript functions we are using are:</p>
+
+<ul>
+<li><code>connect</code> - this creates a new websockets object. this is fairly simple, even if a bit hard to read. there is a part there where instead of writing <code>ws://localhost:3000/nickname</code> we are dynamically producing the same string - it&#8217;s harder to read but it will work also when we move the webpage to a real domain where the string might end up being <code>wss://www.mydomain.com/nickname</code>.</li>
+<li><code>init</code> - this is a very interesting function that defines all the callbacks we might need for the websocket to actually work.</li>
+<li><code>WriteMessage</code> - this simple function adds text to the <code>output</code> element, adding the different styles as needed.</li>
+<li><code>WriteStatus</code> - this function is used to update the status line.</li>
+<li><code>update_status</code> - we use this function to update the status line when the websocket connects and disconnects from the server.</li>
+<li><code>Send</code> - this simple function sends the data from the input element to the websocket connection.</li>
+</ul>
+
+<h2>Congratulations!</h2>
+
+<p>Congratulations! You wrote your first Anorexic chatroom :-)</p>
+
+<p>Using this example we discovered that Anorexic is a powerful Ruby framework that has easy and native support for both RESTful HTTP and WebSockets.</p>
+
+<p>Anorexic allowed us to easily write a very advanced application, while exploring exciting new features and discovering how Anorexic could help our workflow.</p>
+
+<p>There&#8217;s a lot more to explore - enjoy :-)</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
