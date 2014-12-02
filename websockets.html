@@ -84,13 +84,13 @@
 end
 </code></pre>
 
-<p>Next, we set find the root folder where our application exists - we will use this to tell anorexic where our html files, templates and assets are stored (once we write any of them).
-<code>ruby
-# Using pathname extentions for setting public folder
+<p>Next, we set find the root folder where our application exists - we will use this to tell anorexic where our html files, templates and assets are stored (once we write any of them).</p>
+
+<pre><code class="ruby"># Using pathname extentions for setting public folder
 require 'pathname'
 # set up the Root object for easy path access.
 Root = Pathname.new(File.dirname(__FILE__)).expand_path
-</code></p>
+</code></pre>
 
 <p>Then, we set up the Anorexic service&#8217;s parameters - parameters which Anorexic will use to create our main service and host.</p>
 
@@ -131,7 +131,7 @@ Root = Pathname.new(File.dirname(__FILE__)).expand_path
 
 <p>Anorexic controller classes are like virtual folders with special support for RESTful methods (<code>index</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>), HTTP filters and helpers (<code>before</code>, <code>after</code>, <code>redirect_to</code>, <code>send_data</code>), WebSockets methods (<code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>), and WebSockets filters and helpers (<code>pre-connect</code>, <code>broadcast</code>, <code>collect</code>).</p>
 
-<p>Anorexic uses a cummon special parameter called &#8216;id&#8217; to help with all this magic&#8230; if we don&#8217;t define this parameter ourselves, Anorexic will try to append this parameter to the end our route&#8217;s path. So, actually, our route looks like this:</p>
+<p>Anorexic uses a common special parameter called &#8216;id&#8217; to help with all this magic&#8230; if we don&#8217;t define this parameter ourselves, Anorexic will try to append this parameter to the end our route&#8217;s path. So, actually, our route looks like this:</p>
 
 <pre><code class="ruby">route '/(:id)', ChatController
 </code></pre>
@@ -164,7 +164,7 @@ end
 end
 </code></pre>
 
-<p>Actually, some tasks are so cummon - like sending text in our HTTP response - that Anorexic can helps us along. If our method should return a String object, that String will be appended to the response.</p>
+<p>Actually, some tasks are so common - like sending text in our HTTP response - that Anorexic can helps us along. If our method should return a String object, that String will be appended to the response.</p>
 
 <p>Let&#8217;s rewrite our <code>index</code> method to make it cleaner:</p>
 
@@ -301,7 +301,7 @@ end
 
 <p>Did you notice the difference between WebSocket responses and HTTP?</p>
 
-<p>In WebSockets, we don&#8217;t automatically send string data (this is safeguard) and we must use the <code>&lt;&lt;</code> method to add data to the response stream.</p>
+<p>In WebSockets, we don&#8217;t automatically send string data (this is an important safeguard) and we must use the <code>&lt;&lt;</code> method to add data to the response stream.</p>
 
 <h4>Telling people that we left the chatroom</h4>
 
@@ -327,7 +327,7 @@ end
 
 <h4>The login process and telling people we&#8217;re here</h4>
 
-<p>If we ever write a real chatroom, our login process will look mch different - but the following process is good enough for now and it has a lot to teach us&#8230;</p>
+<p>If we ever write a real chatroom, our login process will look somewhat different - but the following process is good enough for now and it has a lot to teach us&#8230;</p>
 
 <p>First, we will ensure the new connection has a nickname (the connection was made to &#8216;/nickname&#8217; rather then the root of our application &#8216;/&#8217;):</p>
 
@@ -347,8 +347,8 @@ end
 <p>We will also add some reserved names to this list, to make sure nobody impersonates a system administrator&#8230; let&#8217;s add this code to our <code>on_connect</code> method:</p>
 
 <pre><code class="ruby">    message = {from: '', at: Time.now}
-    r = collect(:_ask_nickname)
-    if ((r.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
+    list = collect(:_ask_nickname)
+    if (list + ['admin', 'system', 'sys', 'administrator']).include? params[:id]
         message[:event] = :error
         message[:message] = &quot;The nickname '#{params[:id]}' is already taken.&quot;
         response &lt;&lt; message.to_json
@@ -360,18 +360,16 @@ end
 
 <p>Hmm.. <strong>collect</strong>? what is the <code>collect</code> method? - well, this is a little bit of more Anorexic magic that allows us to ask and collect information from all the <em>other</em> active connections. This method returns an array of all the responses.</p>
 
-<p>We will use <code>collect</code> to get an array of all the connected nicknames - we will write the <code>_ask_nickname</code> method later.</p>
-
-<p>&#8230;</p>
+<p>We will use <code>collect</code> to get an array of all the connected nicknames - we will write the <code>_ask_nickname</code> method in just a bit.</p>
 
 <p>Then, if all is good, we will welcome the new connection to our chatroom. We will also tell the new guest who is already connected and broadcast their arrivale to everybody else&#8230;:</p>
 
 <pre><code class="ruby">        message = {from: '', at: Time.now}
         message[:event] = :chat
-        if r.empty?
+        if list.empty?
             message[:message] = &quot;Welcome! You're the first one here.&quot;
         else
-            message[:message] = &quot;Welcome! #{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already here.&quot;
+            message[:message] = &quot;Welcome! #{list[0..-2].join(', ')} #{list[1] ? 'and' : ''} #{list.last} #{list[1] ? 'are' : 'is'} already here.&quot;
         end
         response &lt;&lt; message.to_json
         message[:message] = &quot;#{params[:id]} joined the chatroom.&quot;
@@ -380,8 +378,10 @@ end
 
 <p>Let&#8217;s make it just a bit shorter, most of the code ins&#8217;t important enough to worry about readability&#8230; we can compact our <code>if</code> statement to an inline statement like this:</p>
 
-<pre><code class="ruby">        message[:message] = r.empty? ? &quot;You're the first one here.&quot; : &quot;#{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already in the chatroom&quot;
+<pre><code class="ruby">        message[:message] = list.empty? ? &quot;You're the first one here.&quot; : &quot;#{list[0..-2].join(', ')} #{list[1] ? 'and' : ''} #{list.last} #{list[1] ? 'are' : 'is'} already in the chatroom&quot;
 </code></pre>
+
+<p>We will also want to tweek the code a bit, so the nicknames are case insensative&#8230;</p>
 
 <p>This will be our final <code>on_connect</code> method:</p>
 
@@ -392,8 +392,8 @@ end
         return false
     end
     message = {from: '', at: Time.now}
-    r = collect(:_ask_nickname)
-    if ((r.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
+    list = collect(:_ask_nickname)
+    if ((list.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
         message[:event] = :error
         message[:message] = &quot;The nickname '#{params[:id]}' is already taken.&quot;
         response &lt;&lt; message.to_json
@@ -402,7 +402,7 @@ end
         return
     end
     message[:event] = :chat
-    message[:message] = r.empty? ? &quot;You're the first one here.&quot; : &quot;#{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already in the chatroom&quot;
+    message[:message] = list.empty? ? &quot;You're the first one here.&quot; : &quot;#{list[0..-2].join(', ')} #{list[1] ? 'and' : ''} #{list.last} #{list[1] ? 'are' : 'is'} already in the chatroom&quot;
     response &lt;&lt; message.to_json
     message[:message] = &quot;#{params[:id]} joined the chatroom.&quot;
     broadcast :_send_message, message.to_json
@@ -452,13 +452,13 @@ class ChatController
     end
     def on_connect
         if params[:id].nil?
-            response &lt;&lt; {event: :error, from: :system, at: Time.now, message: &quot;Error: cannot connect without a nickname!&quot;}.to_json
+            response &lt;&lt; {event: :error, from: :system, at: Time.now, message:   &quot;Error: cannot connect without a nickname!&quot;}.to_json
             response.close
             return false
         end
         message = {from: '', at: Time.now}
-        r = collect(:_ask_nickname)
-        if ((r.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
+        list = collect(:_ask_nickname)
+        if ((list.map {|n| n.downcase}) + ['admin', 'system', 'sys', 'administrator']).include? params[:id].downcase
             message[:event] = :error
             message[:message] = &quot;The nickname '#{params[:id]}' is already taken.&quot;
             response &lt;&lt; message.to_json
@@ -467,7 +467,7 @@ class ChatController
             return
         end
         message[:event] = :chat
-        message[:message] = r.empty? ? &quot;You're the first one here.&quot; : &quot;#{r[0..-2].join(', ')} #{r[1] ? 'and' : ''} #{r.last} #{r[1] ? 'are' : 'is'} already in the chatroom&quot;
+        message[:message] = list.empty? ? &quot;You're the first one here.&quot; : &quot;#{list[0..-2].join(', ')} #{list[1] ? 'and' : ''} #{list.last} #{list[1] ? 'are' : 'is'} already in the chatroom&quot;
         response &lt;&lt; message.to_json
         message[:message] = &quot;#{params[:id]} joined the chatroom.&quot;
         broadcast :_send_message, message.to_json
