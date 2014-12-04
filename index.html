@@ -1,58 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
     <title>AnoreXic by boazsegev</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">AnoreXic</h1>
+        <p class="header">A small, pure Ruby, web framework-server... so small - it&#39;s anorexic!</p>
 
-    <header>
-      <div class="container">
-        <h1>AnoreXic</h1>
-        <h2>A small, pure Ruby, web framework-server... so small - it&#39;s anorexic!</h2>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/boazsegev/anorexic/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/boazsegev/anorexic/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/boazsegev/anorexic">View On GitHub</a></li>
+        </ul>
 
-        <section id="downloads">
-          <a href="https://github.com/boazsegev/anorexic/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/boazsegev/anorexic/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/boazsegev/anorexic" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/boazsegev">boazsegev</a></p>
 
-    <div class="container">
-      <section id="main_content">
+
+      </header>
+      <section>
         <h1>
 <a id="anorexic---a-revolution" class="anchor" href="#anorexic---a-revolution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic - a r/evolution</h1>
 
 <p><a href="http://badge.fury.io/rb/anorexic"><img src="https://badge.fury.io/rb/anorexic.svg" alt="Gem Version"></a>
 <a href="http://inch-ci.org/github/boazsegev/anorexic"><img src="http://inch-ci.org/github/boazsegev/anorexic.svg?branch=master" alt="Inline docs"></a></p>
 
-<p>People who are serious about their frameworks, should make their own servers...</p>
-
-<p>(if to para-phrase "People who are serious about their software, should make their own hardware.")</p>
+<blockquote>
+<p>People who are serious about their frameworks, should make their own servers...
+<em>(if to para-phrase "People who are serious about their software, should make their own hardware.")</em></p>
+</blockquote>
 
 <h2>
 <a id="about-the-anorexic-framework--server" class="anchor" href="#about-the-anorexic-framework--server" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the Anorexic framework \ server</h2>
 
 <p>A thin, lightweight, barebones, mutli-threaded Ruby alternative to Rack/Rails/Sintra.</p>
 
-<p>Anorexic contains an object-oriented server, divided into parts that can be changed/updated and removed easily and dynamically. The Anorexic framework runs HTTP and WeSockets, but could as easily be extended to run SMTP, SPDY or any other Protocol (including custom made protocols).</p>
+<p>Anorexic contains an object-oriented server, divided into parts that can be changed/updated and removed easily and dynamically. The Anorexic framework runs HTTP and WebSockets, but could as easily be extended to run SMTP, SPDY or any other Protocol (including custom made protocols).</p>
 
 <p>This allows - much like Node.js - native WebSocket support (and, if you would like to write your own Protocol or Handler, native SMPT or any other custom protocol you might wish to implement).</p>
+
+<p>You can follow our <a href="http://boazsegev.github.io/anorexic/websockets.html">tutorial to write your first Anorexic Chatroom</a> - but first I advise to read this readme and explore the WebSockets example given here.</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Add this line to your application's Gemfile:</p>
 
-<div class="highlight highlight-ruby"><pre><span class="pl-mr"><span class="pl-kos">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>anorexic<span class="pl-pds">'</span></span></span></pre></div>
+<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>anorexic<span class="pl-pds">'</span></span></pre></div>
 
 <p>Or install it yourself as:</p>
 
@@ -159,7 +164,7 @@ end
 <h2>
 <a id="anorexic-controller-classes" class="anchor" href="#anorexic-controller-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Controller classes</h2>
 
-<p>One of the best things about the Anorexic is it's ability to take in any class as a controller class and route to the classes methods with special support for RESTful methods (<code>index</code>, <code>show</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>, <code>before</code> and <code>after</code>) and for WebSockets (<code>pre_connect</code>, <code>on_connect</code>, <code>on_message</code>, <code>on_disconnect</code>, <code>broadcast</code>):</p>
+<p>One of the best things about the Anorexic is it's ability to take in any class as a controller class and route to the classes methods with special support for RESTful methods (<code>index</code>, <code>show</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>, <code>before</code> and <code>after</code>) and for WebSockets (<code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code>, <code>collect</code>):</p>
 
 <pre><code>    require 'anorexic'
 
@@ -179,7 +184,88 @@ end
 
 <p><strong>please read the demo code for Anorexic::StubRESTCtrl and Anorexic::StubWSCtrl to learn more.</strong></p>
 
-<p>Here's some food for thought - code similar to something actually used in the framework app:</p>
+<h2>
+<a id="native-websocket-support" class="anchor" href="#native-websocket-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Native Websocket support</h2>
+
+<p>Anorexic Controllers have access to native websocket support through the <code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code> and <code>collect</code> methods.</p>
+
+<p>Here is some demo code for a simple Websocket broadcasting server, where messages sent to the server will be broadcasted back to all the <strong>other</strong> active connections (the connection sending the message will not recieve the broadcast).</p>
+
+<p>As a client side, we will use the WebSockets echo demo page - we will simply put in ws://localhost:3000/ as the server, instead of the default websocket server (ws://echo.websocket.org).</p>
+
+<p>Remember to connect to the service from at least two browser windows - to truly experience the <code>broadcast</code>ed websocket messages.</p>
+
+<div class="highlight highlight-ruby"><pre>    <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>anorexic<span class="pl-pds">'</span></span>
+
+    <span class="pl-k">class</span> <span class="pl-en">BroadcastCtrl</span>
+        <span class="pl-k">def</span> <span class="pl-en">index</span>
+            redirect_to <span class="pl-s1"><span class="pl-pds">'</span>http://www.websocket.org/echo.html<span class="pl-pds">'</span></span>
+        <span class="pl-k">end</span>
+        <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-vpf">data</span>
+            broadcast <span class="pl-c1">:_send_message</span>, data
+            response <span class="pl-k">&lt;&lt;</span> <span class="pl-s1"><span class="pl-pds">"</span>sent.<span class="pl-pds">"</span></span>
+        <span class="pl-k">end</span>
+        <span class="pl-k">def</span> <span class="pl-en">_send_message</span> <span class="pl-vpf">data</span>
+            response <span class="pl-k">&lt;&lt;</span> data
+        <span class="pl-k">end</span>
+        <span class="pl-k">def</span> <span class="pl-en">people</span>
+            <span class="pl-s1"><span class="pl-pds">'</span>I made this :)<span class="pl-pds">'</span></span>
+        <span class="pl-k">end</span>
+    <span class="pl-k">end</span>
+
+    listen 
+
+    route <span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-vo">BroadcastCtrl</span></pre></div>
+
+<p>method names starting with an underscore ('_') will NOT be made public by the router: so while '/people' is public ( <a href="http://localhost:3000/people">try it</a> ), '/_send_message' will return a 404 not found error ( <a href="http://localhost:3000/_send_message">try it</a> ).</p>
+
+<h2>
+<a id="anorexic-helpers-and-logging" class="anchor" href="#anorexic-helpers-and-logging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Helpers and Logging</h2>
+
+<p>The Anorexic module (also <code>AN</code>) has methods to help with logging, asynchronous callbacks, dynamic routes, dynamic services and more.</p>
+
+<p>Logging:</p>
+
+<pre><code>require 'anorexic'
+
+# simple logging of strings
+AN.info 'log info'
+AN.warn 'log warning'
+AN.error 'log error'
+AN.fatal "log a fatal error (shuoldn't be needed)."
+AN.log_raw "Write raw strings to the logger."
+
+# the logger accepts exceptions as well.
+begin
+    raise "hell"
+rescue Exception =&gt; e
+    AN.error e
+end
+</code></pre>
+
+<p>Asynchronous callbacks (works only while services are active and running):</p>
+
+<pre><code>require 'anorexic'
+
+def my_shutdown_proc time_start
+    puts "Services were running for #{Time.now - time_start} seconds."
+end
+
+# shutdown callbacks
+AN.on_shutdown(Kernel, :my_shutdown_proc, Time.now) { puts "this will run after shutdown." }
+AN.on_shutdown() { puts "this will run too." }
+
+AN.callback(Kernel, :puts, "Please tell me your name?") do
+    AN.callback(Kernel, :gets) {|name| puts "hello #{name}"}
+end
+
+puts "Anorexic will start eating our code once we exit terminal."
+</code></pre>
+
+<h2>
+<a id="food-for-thought---advanced-controller-uses" class="anchor" href="#food-for-thought---advanced-controller-uses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Food for thought - advanced controller uses</h2>
+
+<p>Here's some food for thought - code similar to something actually used at some point while developing the applicatio template used by <code>anorexic new myapp</code>:</p>
 
 <pre><code>require 'anorexic'
 
@@ -265,54 +351,11 @@ route "/" , Controller
 </ul>
 
 <h2>
-<a id="anorexic-helpers-and-logging" class="anchor" href="#anorexic-helpers-and-logging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Helpers and Logging</h2>
-
-<p>The Anorexic module (also <code>AN</code>) has methods to help with logging, asynchronous callbacks, dynamic routes, dynamic services and more.</p>
-
-<p>Logging:</p>
-
-<pre><code>require 'anorexic'
-
-# simple logging of strings
-AN.info 'log info'
-AN.warn 'log warning'
-AN.error 'log error'
-AN.fatal "log a fatal error (shuoldn't be needed)."
-AN.log_raw "Write raw strings to the logger."
-
-# the logger accepts exceptions as well.
-begin
-    raise "hell"
-rescue Exception =&gt; e
-    AN.error e
-end
-</code></pre>
-
-<p>Asynchronous callbacks (works only while services are active and running):</p>
-
-<pre><code>require 'anorexic'
-
-def my_shutdown_proc time_start
-    puts "Services were running for #{Time.now - time_start} seconds."
-end
-
-# shutdown callbacks
-AN.on_shutdown(Kernel, :my_shutdown_proc, Time.now) { puts "this will run after shutdown." }
-AN.on_shutdown() { puts "this will run too." }
-
-AN.callback(Kernel, :puts, "Please tell me your name?") do
-    AN.callback(Kernel, :gets) {|name| puts "hello #{name}"}
-end
-
-puts "Anorexic will start eating our code once we exit terminal."
-</code></pre>
-
-<h2>
 <a id="anorexic-settings" class="anchor" href="#anorexic-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Settings</h2>
 
-<p>Anorexic is ment to be very flexible. please take a look at the Anorexic Module for settings you might want to play with (max_threads, thread_timeout, idle_sleep) or any monkey patching you might enjoy.</p>
+<p>Anorexic is ment to be very flexible. please take a look at the Anorexic Module for settings you might want to play with (max_threads, idle_sleep, create_logger) or any monkey patching you might enjoy.</p>
 
-<p>Feel free to fork or contribute. right now I am one person, but together we can make something exciting that will help us enjoy Ruby in this brave new world.</p>
+<p>Feel free to fork or contribute. right now I am one person, but together we can make something exciting that will help us enjoy Ruby in this brave new world and (hopefully) set an example that will induce progress in the popular mainstream frameworks such as Rails and Sinatra.</p>
 
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
@@ -325,8 +368,11 @@ puts "Anorexic will start eating our code once we exit terminal."
 <li>Create a new Pull Request</li>
 </ol>
       </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
     </div>
-
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
