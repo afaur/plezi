@@ -202,6 +202,8 @@ end
             redirect_to <span class="pl-s1"><span class="pl-pds">'</span>http://www.websocket.org/echo.html<span class="pl-pds">'</span></span>
         <span class="pl-k">end</span>
         <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-vpf">data</span>
+            <span class="pl-c"># the following two lines are the same as:</span>
+            <span class="pl-c"># self.class.broadcast :_send_message, data</span>
             broadcast <span class="pl-c1">:_send_message</span>, data
             response <span class="pl-k">&lt;&lt;</span> <span class="pl-s1"><span class="pl-pds">"</span>sent.<span class="pl-pds">"</span></span>
         <span class="pl-k">end</span>
