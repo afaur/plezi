@@ -1,81 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>AnoreXic by boazsegev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <title>Plezi by boazsegev</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">AnoreXic</h1>
-        <p class="header">A small, pure Ruby, web framework-server... so small - it&#39;s anorexic!</p>
+    <header>
+      <div class="inner">
+        <h1>Plezi</h1>
+        <h2>A small, pure Ruby, web framework-server with native support for Websockets, RESTful routing and HTTP streaming.</h2>
+        <a href="https://github.com/boazsegev/plezi" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/boazsegev/anorexic/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/boazsegev/anorexic/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/boazsegev/anorexic">View On GitHub</a></li>
-        </ul>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="plezi-the-ruby-websocket-and-http-framework" class="anchor" href="#plezi-the-ruby-websocket-and-http-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi, The Ruby Websocket and HTTP Framework</h1>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/boazsegev">boazsegev</a></p>
-
-
-      </header>
-      <section>
-        <h1>
-<a id="anorexic---a-revolution" class="anchor" href="#anorexic---a-revolution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic - a r/evolution</h1>
-
-<p><a href="http://badge.fury.io/rb/anorexic"><img src="https://badge.fury.io/rb/anorexic.svg" alt="Gem Version"></a>
-<a href="http://inch-ci.org/github/boazsegev/anorexic"><img src="http://inch-ci.org/github/boazsegev/anorexic.svg?branch=master" alt="Inline docs"></a></p>
+<p><a href="http://badge.fury.io/rb/plezi"><img src="https://badge.fury.io/rb/plezi.svg" alt="Gem Version"></a>
+<a href="http://inch-ci.org/github/boazsegev/plezi"><img src="http://inch-ci.org/github/boazsegev/plezi.svg?branch=master" alt="Inline docs"></a></p>
 
 <blockquote>
-<p>People who are serious about their frameworks, should make their own servers...
-<em>(if to para-phrase "People who are serious about their software, should make their own hardware.")</em></p>
+<p>People who are serious about their frameworks, should make their own servers...</p>
 </blockquote>
 
+<p><em>(if to para-phrase "People who are serious about their software, should make their own hardware.")</em></p>
+
 <h2>
-<a id="about-the-anorexic-framework--server" class="anchor" href="#about-the-anorexic-framework--server" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the Anorexic framework \ server</h2>
+<a id="about-the-plezi-framework--server" class="anchor" href="#about-the-plezi-framework--server" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the Plezi framework \ server</h2>
 
-<p>A thin, lightweight, barebones, mutli-threaded Ruby alternative to Rack/Rails/Sintra.</p>
+<p>Plezi is an easy to use Ruby Websocket Framework, with full RESTful routing support and HTTP streaming support. It's name comes from the word "fun" in Haitian, since Plezi is really fun to work with and it keeps our code clean and streamlined.</p>
 
-<p>Anorexic contains an object-oriented server, divided into parts that can be changed/updated and removed easily and dynamically. The Anorexic framework runs HTTP and WebSockets, but could as easily be extended to run SMTP, SPDY or any other Protocol (including custom made protocols).</p>
+<p>Plezi works as an asynchronous multi-threaded Ruby alternative to a Rack/Rails/Sintra/Faye/EM-Websockets combo. It's also great as an alternative to socket.io, allowing for both websockets and long pulling.</p>
 
-<p>This allows - much like Node.js - native WebSocket support (and, if you would like to write your own Protocol or Handler, native SMPT or any other custom protocol you might wish to implement).</p>
+<p>Plezi contains an object-oriented server, divided into parts that can be changed/updated and removed easily and dynamically. This allows - much like Node.js - native WebSocket support (and, if you would like to write your own Protocol or Handler, native SMPT or any other custom protocol you might wish to implement).</p>
 
-<p>You can follow our <a href="http://boazsegev.github.io/anorexic/websockets.html">tutorial to write your first Anorexic Chatroom</a> - but first I advise to read this readme and explore the WebSockets example given here.</p>
+<p>You can follow our <a href="http://boazsegev.github.io/plezi/websockets.html">tutorial to write your first Plezi Chatroom</a> - but it's better to start with this readme and explore the WebSockets example given here.</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Add this line to your application's Gemfile:</p>
 
-<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>anorexic<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span></pre></div>
 
 <p>Or install it yourself as:</p>
 
-<pre><code>$ gem install anorexic
+<pre><code>$ gem install plezi
 </code></pre>
 
 <h2>
-<a id="creating-an-anorexic-application" class="anchor" href="#creating-an-anorexic-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating an Anorexic Application</h2>
+<a id="creating-an-plezi-application" class="anchor" href="#creating-an-plezi-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating an Plezi Application</h2>
 
-<p>to create a new barebones app using the Anorexic framework, run from terminal:</p>
+<p>to create a new barebones app using the Plezi framework, run from terminal:</p>
 
-<pre><code>$ anorexic new appname
+<pre><code>$ plezi new appname
 </code></pre>
 
 <p>That's it, now you have a ready to use basic web server (with some demo code), just run it:</p>
 
 <pre><code>$ cd appname
-$ ./appname.rb # ( or: anorexic s )
+$ ./appname.rb # ( or: plezi s )
 </code></pre>
 
 <p>now go, in your browser, to: <a href="http://localhost:3000/">http://localhost:3000/</a></p>
@@ -94,27 +93,115 @@ $ ./appname.rb # ( or: anorexic s )
 
 <p>"Hello World!" in 3 lines - try it in irb (exit irb to start server):</p>
 
-<pre><code>    require 'anorexic'
+<pre><code>    require 'plezi'
     listen
     route(/.?/) { |req, res| res &lt;&lt; "Hello World!" }
 </code></pre>
 
-<p>After you exited irb, the Anorexic server started up. go to http://localhost:3000/ and see it run :)</p>
+<p>After you exited irb, the Plezi server started up. go to http://localhost:3000/ and see it run :)</p>
 
 <h2>
-<a id="anorexic-routes" class="anchor" href="#anorexic-routes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Routes</h2>
+<a id="plezi-controller-classes" class="anchor" href="#plezi-controller-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Controller classes</h2>
 
-<p>Anorexic supports magic routes, in similar formats found in other systems, such as: <code>route "/:required/(:optional)/(:optional_with_format){[\\d]*}", Controler</code>.</p>
+<p>One of the best things about the Plezi is it's ability to take in any class as a controller class and route to the classes methods with special support for RESTful methods (<code>index</code>, <code>show</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>, <code>before</code> and <code>after</code>) and for WebSockets (<code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code>, <code>collect</code>):</p>
 
-<p>Anorexic assummes all simple string routes to be RESTful routes ( <code>"/user" == "/user/(:id)"</code> ).</p>
+<pre><code>    require 'plezi'
 
-<pre><code>require 'anorexic'
+    class Controller
+        def index
+            "Hello World!"
+        end
+    end
+
+    listen
+    route '*' , Controller
+</code></pre>
+
+<p>Except for WebSockets, returning a String will automatically add the string to the response before sending the response - which makes for cleaner code. It's also possible to send the response as it is (by returning true).</p>
+
+<p>Controllers can even be nested (order matters) or have advanced uses that are definitly worth exploring.</p>
+
+<p><strong>please read the demo code for Plezi::StubRESTCtrl and Plezi::StubWSCtrl to learn more.</strong></p>
+
+<h2>
+<a id="native-websocket-and-radis-support" class="anchor" href="#native-websocket-and-radis-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Native Websocket and Radis support</h2>
+
+<p>Plezi Controllers have access to native websocket support through the <code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code> and <code>collect</code> methods.</p>
+
+<p>Here is some demo code for a simple Websocket broadcasting server, where messages sent to the server will be broadcasted back to all the <strong>other</strong> active connections (the connection sending the message will not recieve the broadcast).</p>
+
+<p>As a client side, we will use the WebSockets echo demo page - we will simply put in ws://localhost:3000/ as the server, instead of the default websocket server (ws://echo.websocket.org).</p>
+
+<p>Remember to connect to the service from at least two browser windows - to truly experience the <code>broadcast</code>ed websocket messages.</p>
+
+<div class="highlight highlight-ruby"><pre>    <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span>
+
+    <span class="pl-c"># do you need automated redis support?</span>
+    <span class="pl-c"># require 'redis'</span>
+    <span class="pl-c"># ENV['PL_REDIS_URL'] = "http://user:password@localhost:6379"</span>
+
+    <span class="pl-k">class</span> <span class="pl-en">BroadcastCtrl</span>
+        <span class="pl-k">def</span> <span class="pl-en">index</span>
+            redirect_to <span class="pl-s1"><span class="pl-pds">'</span>http://www.websocket.org/echo.html<span class="pl-pds">'</span></span>
+        <span class="pl-k">end</span>
+        <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-vpf">data</span>
+            <span class="pl-c"># try replacing the following two lines are with:</span>
+            <span class="pl-c"># self.class.broadcast :_send_message, data</span>
+            broadcast <span class="pl-c1">:_send_message</span>, data
+            response <span class="pl-k">&lt;&lt;</span> <span class="pl-s1"><span class="pl-pds">"</span>sent.<span class="pl-pds">"</span></span>
+        <span class="pl-k">end</span>
+        <span class="pl-k">def</span> <span class="pl-en">_send_message</span> <span class="pl-vpf">data</span>
+            response <span class="pl-k">&lt;&lt;</span> data
+        <span class="pl-k">end</span>
+        <span class="pl-k">def</span> <span class="pl-en">people</span>
+            <span class="pl-s1"><span class="pl-pds">'</span>I made this :)<span class="pl-pds">'</span></span>
+        <span class="pl-k">end</span>
+    <span class="pl-k">end</span>
+
+    listen 
+
+    route <span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-vo">BroadcastCtrl</span></pre></div>
+
+<p>method names starting with an underscore ('_') will NOT be made public by the router: so while '/people' is public ( <a href="http://localhost:3000/people">try it</a> ), '/_send_message' will return a 404 not found error ( <a href="http://localhost:3000/_send_message">try it</a> ).</p>
+
+<h2>
+<a id="native-http-streaming-with-asynchronous-events" class="anchor" href="#native-http-streaming-with-asynchronous-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Native HTTP streaming with Asynchronous events</h2>
+
+<p>Plezi comes with native HTTP streaming support, alowing you to use Plezi Events and Timers to send an Asynchronous response.</p>
+
+<p>Let's make the classic 'Hello World' use HTTP Streaming and Asynchronous Plezi Events:</p>
+
+<div class="highlight highlight-ruby"><pre>        <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span>
+
+        <span class="pl-k">class</span> <span class="pl-en">Controller</span>
+            <span class="pl-k">def</span> <span class="pl-en">index</span>
+                response.start_http_streaming
+                <span class="pl-s3">PL</span>.callback(response, <span class="pl-c1">:send</span>, <span class="pl-s1"><span class="pl-pds">"</span>Hello World<span class="pl-pds">"</span></span>) { response.finish }
+                <span class="pl-c1">true</span>
+            <span class="pl-k">end</span>
+        <span class="pl-k">end</span>
+
+        listen
+        route <span class="pl-s1"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span> , <span class="pl-vo">Controller</span></pre></div>
+
+<p>Notice the easy use of Asynchronous Events using the PL#callback method. The optional block passed to this method (<code>response.finish</code>) will be executed only after the asynchronous call for the response#send method with the "Hello World" argument has completed.</p>
+
+<p>More on asynchronous events and timers later.</p>
+
+<h2>
+<a id="plezi-routes" class="anchor" href="#plezi-routes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Routes</h2>
+
+<p>Plezi supports magic routes, in similar formats found in other systems, such as: <code>route "/:required/(:optional_with_format){[\\d]*}/(:optional)", Plezi::StubRESTCtrl</code>.</p>
+
+<p>Plezi assummes all simple string routes to be RESTful routes woth the parameter <code>:id</code> ( <code>"/user" == "/user/(:id)"</code> ).</p>
+
+<pre><code>require 'plezi'
 listen
 
 # this route demos a route for listing/showing posts,
 # with or without revision numbers or page-control....
 # notice the single quotes (otherwise the '\' would need to be escaped).
-route '/post/(:id)/(:revision){[\d]+\.[\d]+}/(:page_number)', Anorexic::StubRESTCtrl
+route '/post/(:id)/(:revision){[\d]+\.[\d]+}/(:page_number)', Plezi::StubRESTCtrl
 </code></pre>
 
 <p>now visit:</p>
@@ -127,11 +214,11 @@ route '/post/(:id)/(:revision){[\d]+\.[\d]+}/(:page_number)', Anorexic::StubREST
 <p><strong>please see the <code>route</code> documentation for more information on routes</strong>.</p>
 
 <h2>
-<a id="anorexic-virtual-hosts" class="anchor" href="#anorexic-virtual-hosts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Virtual Hosts</h2>
+<a id="plezi-virtual-hosts" class="anchor" href="#plezi-virtual-hosts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Virtual Hosts</h2>
 
-<p>Anorexic can be used to create virtual hosts for the same service:</p>
+<p>Plezi can be used to create virtual hosts for the same service:</p>
 
-<pre><code>require 'anorexic'
+<pre><code>require 'plezi'
 listen
 host 'localhost', alias: 'localhost2'
 
@@ -162,114 +249,59 @@ end
 </ul>
 
 <h2>
-<a id="anorexic-controller-classes" class="anchor" href="#anorexic-controller-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Controller classes</h2>
+<a id="plezi-logging" class="anchor" href="#plezi-logging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Logging</h2>
 
-<p>One of the best things about the Anorexic is it's ability to take in any class as a controller class and route to the classes methods with special support for RESTful methods (<code>index</code>, <code>show</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>, <code>before</code> and <code>after</code>) and for WebSockets (<code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code>, <code>collect</code>):</p>
-
-<pre><code>    require 'anorexic'
-
-    class Controller
-        def index
-            "Hello World!"
-        end
-    end
-
-    listen
-    route '*' , Controller
-</code></pre>
-
-<p>Except for WebSockets, returning a String will automatically add the string to the response before sending the response - which makes for cleaner code. It's also possible to send the response as it is (by returning true).</p>
-
-<p>Controllers can even be nested (order matters) or have advanced uses that are definitly worth exploring.</p>
-
-<p><strong>please read the demo code for Anorexic::StubRESTCtrl and Anorexic::StubWSCtrl to learn more.</strong></p>
-
-<h2>
-<a id="native-websocket-support" class="anchor" href="#native-websocket-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Native Websocket support</h2>
-
-<p>Anorexic Controllers have access to native websocket support through the <code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code> and <code>collect</code> methods.</p>
-
-<p>Here is some demo code for a simple Websocket broadcasting server, where messages sent to the server will be broadcasted back to all the <strong>other</strong> active connections (the connection sending the message will not recieve the broadcast).</p>
-
-<p>As a client side, we will use the WebSockets echo demo page - we will simply put in ws://localhost:3000/ as the server, instead of the default websocket server (ws://echo.websocket.org).</p>
-
-<p>Remember to connect to the service from at least two browser windows - to truly experience the <code>broadcast</code>ed websocket messages.</p>
-
-<div class="highlight highlight-ruby"><pre>    <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>anorexic<span class="pl-pds">'</span></span>
-
-    <span class="pl-k">class</span> <span class="pl-en">BroadcastCtrl</span>
-        <span class="pl-k">def</span> <span class="pl-en">index</span>
-            redirect_to <span class="pl-s1"><span class="pl-pds">'</span>http://www.websocket.org/echo.html<span class="pl-pds">'</span></span>
-        <span class="pl-k">end</span>
-        <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-vpf">data</span>
-            <span class="pl-c"># the following two lines are the same as:</span>
-            <span class="pl-c"># self.class.broadcast :_send_message, data</span>
-            broadcast <span class="pl-c1">:_send_message</span>, data
-            response <span class="pl-k">&lt;&lt;</span> <span class="pl-s1"><span class="pl-pds">"</span>sent.<span class="pl-pds">"</span></span>
-        <span class="pl-k">end</span>
-        <span class="pl-k">def</span> <span class="pl-en">_send_message</span> <span class="pl-vpf">data</span>
-            response <span class="pl-k">&lt;&lt;</span> data
-        <span class="pl-k">end</span>
-        <span class="pl-k">def</span> <span class="pl-en">people</span>
-            <span class="pl-s1"><span class="pl-pds">'</span>I made this :)<span class="pl-pds">'</span></span>
-        <span class="pl-k">end</span>
-    <span class="pl-k">end</span>
-
-    listen 
-
-    route <span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-vo">BroadcastCtrl</span></pre></div>
-
-<p>method names starting with an underscore ('_') will NOT be made public by the router: so while '/people' is public ( <a href="http://localhost:3000/people">try it</a> ), '/_send_message' will return a 404 not found error ( <a href="http://localhost:3000/_send_message">try it</a> ).</p>
-
-<h2>
-<a id="anorexic-helpers-and-logging" class="anchor" href="#anorexic-helpers-and-logging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Helpers and Logging</h2>
-
-<p>The Anorexic module (also <code>AN</code>) has methods to help with logging, asynchronous callbacks, dynamic routes, dynamic services and more.</p>
+<p>The Plezi module (also <code>PL</code>) has methods to help with logging as well as the support you already noticed for dynamic routes, dynamic services and more.</p>
 
 <p>Logging:</p>
 
-<pre><code>require 'anorexic'
+<pre><code>require 'plezi'
 
 # simple logging of strings
-AN.info 'log info'
-AN.warn 'log warning'
-AN.error 'log error'
-AN.fatal "log a fatal error (shuoldn't be needed)."
-AN.log_raw "Write raw strings to the logger."
+PL.info 'log info'
+PL.warn 'log warning'
+PL.error 'log error'
+PL.fatal "log a fatal error (shuoldn't be needed)."
+PL.log_raw "Write raw strings to the logger."
 
 # the logger accepts exceptions as well.
 begin
     raise "hell"
 rescue Exception =&gt; e
-    AN.error e
+    PL.error e
 end
 </code></pre>
 
+<h2>
+<a id="plezi-events-and-timers" class="anchor" href="#plezi-events-and-timers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Events and Timers</h2>
+
+<p>The Plezi module (also <code>PL</code>) also has methods to help with asynchronous tasking, callbacks, timers and customized shutdown cleanup.</p>
+
 <p>Asynchronous callbacks (works only while services are active and running):</p>
 
-<pre><code>require 'anorexic'
+<pre><code>require 'plezi'
 
 def my_shutdown_proc time_start
-    puts "Services were running for #{Time.now - time_start} seconds."
+    puts "Services were running for #{Time.now - time_start} ms."
 end
 
 # shutdown callbacks
-AN.on_shutdown(Kernel, :my_shutdown_proc, Time.now) { puts "this will run after shutdown." }
-AN.on_shutdown() { puts "this will run too." }
+PL.on_shutdown(Kernel, :my_shutdown_proc, Time.now) { puts "this will run after shutdown." }
+PL.on_shutdown() { puts "this will run too." }
 
-AN.callback(Kernel, :puts, "Please tell me your name?") do
-    AN.callback(Kernel, :gets) {|name| puts "hello #{name}"}
-end
+# a timer
+PL.run_after 2, -&gt; {puts "this will wait 2 seconds to run... too late. for this example"}
 
-puts "Anorexic will start eating our code once we exit terminal."
+# an asynchronous method call with an optional callback block
+PL.callback(Kernel, :puts, "Plezi will start eating our code once we exit terminal.") {puts 'first output finished'}
 </code></pre>
 
 <h2>
 <a id="food-for-thought---advanced-controller-uses" class="anchor" href="#food-for-thought---advanced-controller-uses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Food for thought - advanced controller uses</h2>
 
-<p>Here's some food for thought - code similar to something actually used at some point while developing the applicatio template used by <code>anorexic new myapp</code>:</p>
+<p>Here's some food for thought - code similar to something actually used at some point while developing the applicatio template used by <code>plezi new myapp</code>:</p>
 
-<pre><code>require 'anorexic'
+<pre><code>require 'plezi'
 
 # this controller will re-write the request to extract data,
 # and then it will fail, so that routing continues.
@@ -353,9 +385,9 @@ route "/" , Controller
 </ul>
 
 <h2>
-<a id="anorexic-settings" class="anchor" href="#anorexic-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anorexic Settings</h2>
+<a id="plezi-settings" class="anchor" href="#plezi-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Settings</h2>
 
-<p>Anorexic is ment to be very flexible. please take a look at the Anorexic Module for settings you might want to play with (max_threads, idle_sleep, create_logger) or any monkey patching you might enjoy.</p>
+<p>Plezi is ment to be very flexible. please take a look at the Plezi Module for settings you might want to play with (max_threads, idle_sleep, create_logger) or any monkey patching you might enjoy.</p>
 
 <p>Feel free to fork or contribute. right now I am one person, but together we can make something exciting that will help us enjoy Ruby in this brave new world and (hopefully) set an example that will induce progress in the popular mainstream frameworks such as Rails and Sinatra.</p>
 
@@ -363,18 +395,31 @@ route "/" , Controller
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <ol>
-<li>Fork it ( <a href="https://github.com/boazsegev/anorexic-server/fork">https://github.com/boazsegev/anorexic-server/fork</a> )</li>
+<li>Fork it ( <a href="https://github.com/boazsegev/plezi-server/fork">https://github.com/boazsegev/plezi-server/fork</a> )</li>
 <li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
 <li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create a new Pull Request</li>
 </ol>
-      </section>
-      <footer>
-        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
-      </footer>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/boazsegev/plezi/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/boazsegev/plezi/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/boazsegev/plezi"></a> is maintained by <a href="https://github.com/boazsegev">boazsegev</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+  
   </body>
 </html>
