@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
@@ -29,16 +29,16 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a id="plezi-the-ruby-websocket-and-http-framework" class="anchor" href="#plezi-the-ruby-websocket-and-http-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi, The Ruby Websocket and HTTP Framework</h1>
+<a id="plezi-the-rack-free-ruby-framework-for-realtime-web-apps" class="anchor" href="#plezi-the-rack-free-ruby-framework-for-realtime-web-apps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi, The Rack Free Ruby framework for realtime web-apps</h1>
 
 <p><a href="http://badge.fury.io/rb/plezi"><img src="https://badge.fury.io/rb/plezi.svg" alt="Gem Version"></a>
 <a href="http://inch-ci.org/github/boazsegev/plezi"><img src="http://inch-ci.org/github/boazsegev/plezi.svg?branch=master" alt="Inline docs"></a></p>
 
 <blockquote>
-<p>People who are serious about their frameworks, should make their own servers...</p>
+<p>People who are serious about their frameworks, should write their own servers...</p>
 </blockquote>
 
-<p><em>(if to para-phrase "People who are serious about their software, should make their own hardware.")</em></p>
+<p>Find more info on <a href="http://www.rubydoc.info/gems/plezi/">Plezi's framework, web server and websocket documentation</a></p>
 
 <h2>
 <a id="about-the-plezi-framework--server" class="anchor" href="#about-the-plezi-framework--server" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the Plezi framework \ server</h2>
@@ -56,7 +56,7 @@
 
 <p>Add this line to your application's Gemfile:</p>
 
-<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span></pre></div>
 
 <p>Or install it yourself as:</p>
 
@@ -64,7 +64,7 @@
 </code></pre>
 
 <h2>
-<a id="creating-an-plezi-application" class="anchor" href="#creating-an-plezi-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating an Plezi Application</h2>
+<a id="creating-a-plezi-application" class="anchor" href="#creating-a-plezi-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a Plezi Application</h2>
 
 <p>to create a new barebones app using the Plezi framework, run from terminal:</p>
 
@@ -134,35 +134,38 @@ $ ./appname.rb # ( or: plezi s )
 
 <p>Remember to connect to the service from at least two browser windows - to truly experience the <code>broadcast</code>ed websocket messages.</p>
 
-<div class="highlight highlight-ruby"><pre>    <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span>
+<div class="highlight highlight-ruby"><pre>    <span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span>
 
     <span class="pl-c"># do you need automated redis support?</span>
     <span class="pl-c"># require 'redis'</span>
-    <span class="pl-c"># ENV['PL_REDIS_URL'] = "http://user:password@localhost:6379"</span>
+    <span class="pl-c"># ENV['PL_REDIS_URL'] = "redis://user:password@localhost:6379"</span>
 
     <span class="pl-k">class</span> <span class="pl-en">BroadcastCtrl</span>
         <span class="pl-k">def</span> <span class="pl-en">index</span>
-            redirect_to <span class="pl-s1"><span class="pl-pds">'</span>http://www.websocket.org/echo.html<span class="pl-pds">'</span></span>
+            redirect_to <span class="pl-s"><span class="pl-pds">'</span>http://www.websocket.org/echo.html<span class="pl-pds">'</span></span>
         <span class="pl-k">end</span>
-        <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-vpf">data</span>
+        <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-smi">data</span>
             <span class="pl-c"># try replacing the following two lines are with:</span>
             <span class="pl-c"># self.class.broadcast :_send_message, data</span>
             broadcast <span class="pl-c1">:_send_message</span>, data
-            response <span class="pl-k">&lt;&lt;</span> <span class="pl-s1"><span class="pl-pds">"</span>sent.<span class="pl-pds">"</span></span>
+            response <span class="pl-k">&lt;&lt;</span> <span class="pl-s"><span class="pl-pds">"</span>sent.<span class="pl-pds">"</span></span>
         <span class="pl-k">end</span>
-        <span class="pl-k">def</span> <span class="pl-en">_send_message</span> <span class="pl-vpf">data</span>
+        <span class="pl-k">def</span> <span class="pl-en">_send_message</span> <span class="pl-smi">data</span>
             response <span class="pl-k">&lt;&lt;</span> data
         <span class="pl-k">end</span>
-        <span class="pl-k">def</span> <span class="pl-en">people</span>
-            <span class="pl-s1"><span class="pl-pds">'</span>I made this :)<span class="pl-pds">'</span></span>
+        <span class="pl-k">def</span> <span class="pl-en">hello</span>
+            <span class="pl-s"><span class="pl-pds">'</span>Hello!<span class="pl-pds">'</span></span>
+        <span class="pl-k">end</span>
+        def_special_method <span class="pl-s"><span class="pl-pds">"</span>humans.txt<span class="pl-pds">"</span></span> <span class="pl-k">do</span>
+            <span class="pl-s"><span class="pl-pds">'</span>I made this :)<span class="pl-pds">'</span></span>
         <span class="pl-k">end</span>
     <span class="pl-k">end</span>
 
     listen 
 
-    route <span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-vo">BroadcastCtrl</span></pre></div>
+    route <span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-c1">BroadcastCtrl</span></pre></div>
 
-<p>method names starting with an underscore ('_') will NOT be made public by the router: so while '/people' is public ( <a href="http://localhost:3000/people">try it</a> ), '/_send_message' will return a 404 not found error ( <a href="http://localhost:3000/_send_message">try it</a> ).</p>
+<p>method names starting with an underscore ('_') will NOT be made public by the router: so while both '/hello' and '/humans.txt' are public ( <a href="http://localhost:3000/humans.txt">try it</a> ), '/_send_message' will return a 404 not found error ( <a href="http://localhost:3000/_send_message">try it</a> ).</p>
 
 <h2>
 <a id="native-http-streaming-with-asynchronous-events" class="anchor" href="#native-http-streaming-with-asynchronous-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Native HTTP streaming with Asynchronous events</h2>
@@ -171,18 +174,18 @@ $ ./appname.rb # ( or: plezi s )
 
 <p>Let's make the classic 'Hello World' use HTTP Streaming and Asynchronous Plezi Events:</p>
 
-<div class="highlight highlight-ruby"><pre>        <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span>
+<div class="highlight highlight-ruby"><pre>        <span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span>
 
         <span class="pl-k">class</span> <span class="pl-en">Controller</span>
             <span class="pl-k">def</span> <span class="pl-en">index</span>
                 response.start_http_streaming
-                <span class="pl-s3">PL</span>.callback(response, <span class="pl-c1">:send</span>, <span class="pl-s1"><span class="pl-pds">"</span>Hello World<span class="pl-pds">"</span></span>) { response.finish }
+                <span class="pl-c1">PL</span>.callback(response, <span class="pl-c1">:send</span>, <span class="pl-s"><span class="pl-pds">"</span>Hello World<span class="pl-pds">"</span></span>) { response.finish }
                 <span class="pl-c1">true</span>
             <span class="pl-k">end</span>
         <span class="pl-k">end</span>
 
         listen
-        route <span class="pl-s1"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span> , <span class="pl-vo">Controller</span></pre></div>
+        route <span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span> , <span class="pl-c1">Controller</span></pre></div>
 
 <p>Notice the easy use of Asynchronous Events using the PL#callback method. The optional block passed to this method (<code>response.finish</code>) will be executed only after the asynchronous call for the response#send method with the "Hello World" argument has completed.</p>
 
@@ -193,7 +196,7 @@ $ ./appname.rb # ( or: plezi s )
 
 <p>Plezi supports magic routes, in similar formats found in other systems, such as: <code>route "/:required/(:optional_with_format){[\\d]*}/(:optional)", Plezi::StubRESTCtrl</code>.</p>
 
-<p>Plezi assummes all simple string routes to be RESTful routes woth the parameter <code>:id</code> ( <code>"/user" == "/user/(:id)"</code> ).</p>
+<p>Plezi assummes all simple string routes to be RESTful routes with the parameter <code>:id</code> ( <code>"/user" == "/user/(:id)"</code> ).</p>
 
 <pre><code>require 'plezi'
 listen
@@ -222,7 +225,7 @@ route '/post/(:id)/(:revision){[\d]+\.[\d]+}/(:page_number)', Plezi::StubRESTCtr
 listen
 host 'localhost', alias: 'localhost2'
 
-shared_route '/people' do |req, res|
+shared_route '/humans.txt' do |req, res|
     res &lt;&lt; "we are people - shared by all routes."
 end
 
@@ -244,8 +247,8 @@ end
 <ul>
 <li><a href="http://127.0.0.1:3000/">http://127.0.0.1:3000/</a></li>
 <li><a href="http://localhost:3000/">http://localhost:3000/</a></li>
-<li><a href="http://127.0.0.1:3000/people">http://127.0.0.1:3000/people</a></li>
-<li><a href="http://localhost:3000/people">http://localhost:3000/people</a></li>
+<li><a href="http://127.0.0.1:3000/humans.txt">http://127.0.0.1:3000/humans.txt</a></li>
+<li><a href="http://localhost:3000/humans.txt">http://localhost:3000/humans.txt</a></li>
 </ul>
 
 <h2>
@@ -282,7 +285,7 @@ end
 <pre><code>require 'plezi'
 
 def my_shutdown_proc time_start
-    puts "Services were running for #{Time.now - time_start} ms."
+    puts "Services were running for #{Time.now - time_start} seconds."
 end
 
 # shutdown callbacks
@@ -297,32 +300,19 @@ PL.callback(Kernel, :puts, "Plezi will start eating our code once we exit termin
 </code></pre>
 
 <h2>
-<a id="food-for-thought---advanced-controller-uses" class="anchor" href="#food-for-thought---advanced-controller-uses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Food for thought - advanced controller uses</h2>
+<a id="re-write-routes" class="anchor" href="#re-write-routes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Re-write Routes</h2>
 
-<p>Here's some food for thought - code similar to something actually used at some point while developing the applicatio template used by <code>plezi new myapp</code>:</p>
+<p>Plezi supports special routes used to re-write the request and extract parameters for all future routes.</p>
+
+<p>This allows you to create path prefixes which will be removed once their information is extracted.</p>
+
+<p>This is great for setting global information such as internationalization (I18n) locales.</p>
+
+<p>By using a route with the a 'false' controller, the parameters extracted are automatically retained.</p>
+
+<p>*(Older versions of Plezi allowed this behavior for all routes, but it was deprecated starting version 0.7.4).</p>
 
 <pre><code>require 'plezi'
-
-# this controller will re-write the request to extract data,
-# and then it will fail, so that routing continues.
-#
-# this is here just for the demo.
-#
-class ReWriteController
-    # using the before filter and regular expressions to make some changes.
-    def before
-        # extract the fr and en locales.
-        result = request.path.match /^\/(en|fr)($|\/.*)/
-
-        if result
-            params[:locale] = result[1]
-            request.path = result[2]
-        end
-
-        # let the routing continue.
-        return false
-    end
-end
 
 class Controller
     def index
@@ -341,31 +331,23 @@ class Controller
     end
     def delete
         return "Mon Dieu! Mon français est mauvais!" if params[:locale] == 'fr'
-        "did you try /#{params["id"]}/?_method=delete or does your server support a native DELETE method?"
+        "did you try #{request.base_url + request.original_path}?_method=delete or does your server support a native DELETE method?"
     end
 end
 
 listen
 
-# we run the ReWriteController first, to rewrite the path for all the remaining routes.
-#
-# this is here just for the demo...
-#
-# ...in this specific case, it is possible to dispense with the ReWriteController class
-# and write:
-#
-# route '/(:locale){fr|en}/*', false
-#
-# the false controller acts as a simple path re-write that
-# deletes everything before the '*' sign (the catch-all).
-#
-route '*' , ReWriteController
+# this is our re-write route.
+# it will extract the locale and re-write the request.
+route '/:locale{fr|en}/*', false
 
 # this route takes a regular expression that is a simple math calculation
 # (calculator)
+#
+# it is an example for a Proc controller, which can replace the Class controller.
 route /^\/[\d\+\-\*\/\(\)\.]+$/ do |request, response|
     message = (request.params[:locale] == 'fr') ? "La solution est" : "My Answer is"
-    response &lt;&lt; "#{message}: #{eval(request.path[1..-1])}"
+    response &lt;&lt; "#{message}: #{eval( request.path[1..-1] )}"
 end
 
 route "/users" , Controller
@@ -379,10 +361,15 @@ route "/" , Controller
 <li><a href="http://localhost:3000/">http://localhost:3000/</a></li>
 <li><a href="http://localhost:3000/fr">http://localhost:3000/fr</a></li>
 <li><a href="http://localhost:3000/users/hello">http://localhost:3000/users/hello</a></li>
-<li><a href="http://localhost:3000/(5+5*20-15)/9">http://localhost:3000/(5+5*20-15)/9</a></li>
-<li><a href="http://localhost:3000/fr/(5+5*20-15)/9">http://localhost:3000/fr/(5+5*20-15)/9</a></li>
+<li><a href="http://localhost:3000/users/(5+5*20-15)/9.0">http://localhost:3000/users/(5+5*20-15)/9.0</a></li>
+<li><a href="http://localhost:3000/(5+5*20-15)/9">http://localhost:3000/(5+5*20-15)/9.0</a></li>
+<li><a href="http://localhost:3000/fr/(5+5*20-15)/9">http://localhost:3000/fr/(5+5*20-15)/9.0</a></li>
 <li><a href="http://localhost:3000/users/hello?_method=delete">http://localhost:3000/users/hello?_method=delete</a></li>
 </ul>
+
+<p>As you can see in the example above, Plezi supports Proc routes as well as Class controller routes.</p>
+
+<p>Please notice that there are some differences between the two. Proc routes less friedly, but plenty powerful and are great for custom 404 error handling.</p>
 
 <h2>
 <a id="plezi-settings" class="anchor" href="#plezi-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Settings</h2>
@@ -395,7 +382,7 @@ route "/" , Controller
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <ol>
-<li>Fork it ( <a href="https://github.com/boazsegev/plezi-server/fork">https://github.com/boazsegev/plezi-server/fork</a> )</li>
+<li>Fork it ( <a href="https://github.com/boazsegev/plezi/fork">https://github.com/boazsegev/plezi/fork</a> )</li>
 <li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
 <li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
