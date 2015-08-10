@@ -1,55 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>Plezi by boazsegev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Plezi by boazsegev</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Plezi</h1>
-        <h2>A small, pure Ruby, web framework-server with native support for Websockets, RESTful routing and HTTP streaming.</h2>
-        <a href="https://github.com/boazsegev/plezi" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Plezi</h1>
+      <h2 class="project-tagline">A small, pure Ruby, web framework-server with native support for Websockets, RESTful routing and HTTP streaming.</h2>
+      <a href="https://github.com/boazsegev/plezi" class="btn">View on GitHub</a>
+      <a href="https://github.com/boazsegev/plezi/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/boazsegev/plezi/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
-<a id="plezi-the-rack-free-ruby-framework-for-realtime-web-apps" class="anchor" href="#plezi-the-rack-free-ruby-framework-for-realtime-web-apps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi, The Rack Free Ruby framework for realtime web-apps</h1>
+    <section class="main-content">
+      <h1>
+<a id="plezi-the-ruby-framework-for-realtime-web-apps" class="anchor" href="#plezi-the-ruby-framework-for-realtime-web-apps" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/boazsegev/plezi">Plezi</a>, The Ruby framework for realtime web-apps</h1>
 
 <p><a href="http://badge.fury.io/rb/plezi"><img src="https://badge.fury.io/rb/plezi.svg" alt="Gem Version"></a>
-<a href="http://inch-ci.org/github/boazsegev/plezi"><img src="http://inch-ci.org/github/boazsegev/plezi.svg?branch=master" alt="Inline docs"></a></p>
+<a href="http://www.rubydoc.info/github/boazsegev/plezi/master"><img src="http://inch-ci.org/github/boazsegev/plezi.svg?branch=master" alt="Inline docs"></a></p>
 
-<blockquote>
-<p>People who are serious about their frameworks, should write their own servers...</p>
-</blockquote>
+<p>Plezi is an easy to use Ruby Websocket Framework, with full RESTful routing support and HTTP streaming support. It's name comes from the word "fun", or "pleasure", since Plezi is a pleasure to work with.</p>
 
-<p>Find more info on <a href="http://www.rubydoc.info/gems/plezi/">Plezi's framework, web server and websocket documentation</a></p>
+<p>With Plezi, you can easily:</p>
 
-<h2>
-<a id="about-the-plezi-framework--server" class="anchor" href="#about-the-plezi-framework--server" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the Plezi framework \ server</h2>
+<ol>
+<li><p>Add Websocket services and RESTful HTTP Streaming to your existing Web-App, (Rails/Sinatra or any other Rack based Ruby app).</p></li>
+<li><p>Create an easily scalable backend for your SPA.</p></li>
+<li><p>Create a full fledged Ruby web application, taking full advantage of RESTful routing, HTTP streaming and scalable Websocket features.</p></li>
+</ol>
 
-<p>Plezi is an easy to use Ruby Websocket Framework, with full RESTful routing support and HTTP streaming support. It's name comes from the word "fun" in Haitian, since Plezi is really fun to work with and it keeps our code clean and streamlined.</p>
-
-<p>Plezi works as an asynchronous multi-threaded Ruby alternative to a Rack/Rails/Sintra/Faye/EM-Websockets combo. It's also great as an alternative to socket.io, allowing for both websockets and long pulling.</p>
-
-<p>Plezi contains an object-oriented server, divided into parts that can be changed/updated and removed easily and dynamically. This allows - much like Node.js - native WebSocket support (and, if you would like to write your own Protocol or Handler, native SMPT or any other custom protocol you might wish to implement).</p>
-
-<p>You can follow our <a href="http://boazsegev.github.io/plezi/websockets.html">tutorial to write your first Plezi Chatroom</a> - but it's better to start with this readme and explore the WebSockets example given here.</p>
+<p>Plezi leverages <a href="https://github.com/boazsegev/GRHttp">GRHttp server's</a> new architecture. GRHttp is a pure Ruby HTTP and Websocket Generic Server built using <a href="https://github.com/boazsegev/GReactor">GReactor</a> - a multi-threaded pure ruby alternative to EventMachine with basic process forking support (enjoy forking, if your code is scaling ready).</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -71,39 +57,29 @@
 <pre><code>$ plezi new appname
 </code></pre>
 
-<p>That's it, now you have a ready to use basic web server (with some demo code), just run it:</p>
+<p>That's it, now you have a ready to use basic web server (with some demo code, such as a websocket chatroom).</p>
+
+<p>If you're on MacOS or linux you can simply double click the <code>appname</code> script file in the <code>appname</code> folder. Or, from the terminal, you can type:</p>
 
 <pre><code>$ cd appname
-$ ./appname.rb # ( or: plezi s )
+$ ./appname # ( or: plezi s )
 </code></pre>
 
 <p>now go, in your browser, to: <a href="http://localhost:3000/">http://localhost:3000/</a></p>
 
 <p>the default first port for the app is 3000. you can set the first port to listen to by using the <code>-p</code> option (make sure you have permissions for the requested port):</p>
 
-<pre><code>$ ./appname.rb -p 80
+<pre><code>$ ./appname -p 80
 </code></pre>
 
-<p>you now have a smart framework app that will happily eat any gem you feed it. it responds extra well to Haml, Sass and Coffee-Script, which you can enable in it's Gemfile.</p>
-
-<h2>
-<a id="barebones-web-service" class="anchor" href="#barebones-web-service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Barebones Web Service</h2>
-
-<p>this example is basic, useless, but required for every doc out there...</p>
-
-<p>"Hello World!" in 3 lines - try it in irb (exit irb to start server):</p>
-
-<pre><code>    require 'plezi'
-    listen
-    route(/.?/) { |req, res| res &lt;&lt; "Hello World!" }
-</code></pre>
-
-<p>After you exited irb, the Plezi server started up. go to http://localhost:3000/ and see it run :)</p>
+<p>you now have a smart framework app that will happily assimilate any gem you feed it. it responds extra well to Haml, Sass and Coffee-Script, which you can enable in it's Gemfile.</p>
 
 <h2>
 <a id="plezi-controller-classes" class="anchor" href="#plezi-controller-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Controller classes</h2>
 
-<p>One of the best things about the Plezi is it's ability to take in any class as a controller class and route to the classes methods with special support for RESTful methods (<code>index</code>, <code>show</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>, <code>before</code> and <code>after</code>) and for WebSockets (<code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code>, <code>collect</code>):</p>
+<p>One of the best things about the Plezi is it's ability to take in any class as a controller class and route to the classes methods with special support for RESTful methods (<code>index</code>, <code>show</code>, <code>new</code>, <code>save</code>, <code>update</code>, <code>delete</code>, <code>before</code> and <code>after</code>) and for WebSockets (<code>pre_connect</code>, <code>on_open</code>, <code>on_message(data)</code>, <code>on_close</code>, <code>broadcast</code>, <code>unicast</code>, <code>multicast</code>, <code>on_broadcast(data)</code>).</p>
+
+<p>Here is a Hello World using a Controller class (run in <code>irb</code>):</p>
 
 <pre><code>    require 'plezi'
 
@@ -115,18 +91,20 @@ $ ./appname.rb # ( or: plezi s )
 
     listen
     route '*' , Controller
+
+    exit # Plezi will autostart once you exit irb.
 </code></pre>
 
-<p>Except for WebSockets, returning a String will automatically add the string to the response before sending the response - which makes for cleaner code. It's also possible to send the response as it is (by returning true).</p>
+<p>Except while using WebSockets, returning a String will automatically add the string to the response before sending the response - which makes for cleaner code. It's also possible to use the <code>response</code> object to set the response or stream HTTP (return true instead of a stream when you're done).</p>
 
-<p>Controllers can even be nested (order matters) or have advanced uses that are definitly worth exploring.</p>
+<p>It's also possible to define a number of controllers for a similar route. The controllers will answer in the order in which the routes are defined (this allows to group code by logic instead of url).</p>
 
-<p><strong>please read the demo code for Plezi::StubRESTCtrl and Plezi::StubWSCtrl to learn more.</strong></p>
+<p>* please read the demo code for Plezi::StubRESTCtrl and Plezi::StubWSCtrl to learn more. Also, read more about the <a href="https://github.com/boazsegev/GRHttp">GRHttp Websocket and HTTP server</a> at the core of Plezi to get more information about the amazing <a href="http://www.rubydoc.info/github/boazsegev/GRHttp/master/GRHttp/HTTPRequest">HTTPRequest</a> and <a href="http://www.rubydoc.info/github/boazsegev/GRHttp/master/GRHttp/HTTPResponse">HTTPResponse</a> objects.</p>
 
 <h2>
 <a id="native-websocket-and-redis-support" class="anchor" href="#native-websocket-and-redis-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Native Websocket and Redis support</h2>
 
-<p>Plezi Controllers have access to native websocket support through the <code>pre_connect</code>, <code>on_connect</code>, <code>on_message(data)</code>, <code>on_disconnect</code>, <code>broadcast</code> and <code>collect</code> methods.</p>
+<p>Plezi Controllers have access to native websocket support through the <code>pre_connect</code>, <code>on_open</code>, <code>on_message(data)</code>, <code>on_close</code>, <code>broadcast</code> and <code>unicast</code> methods.</p>
 
 <p>Here is some demo code for a simple Websocket broadcasting server, where messages sent to the server will be broadcasted back to all the <strong>other</strong> active connections (the connection sending the message will not recieve the broadcast).</p>
 
@@ -168,18 +146,160 @@ $ ./appname.rb # ( or: plezi s )
 <p>method names starting with an underscore ('_') will NOT be made public by the router: so while both '/hello' and '/humans.txt' are public ( <a href="http://localhost:3000/humans.txt">try it</a> ), '/_send_message' will return a 404 not found error ( <a href="http://localhost:3000/_send_message">try it</a> ).</p>
 
 <h2>
+<a id="adding-websockets-to-your-existing-railssinatrarack-application" class="anchor" href="#adding-websockets-to-your-existing-railssinatrarack-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Websockets to your existing Rails/Sinatra/Rack application</h2>
+
+<p>You already have an amazing WebApp, but now you want to add websocket broadcasting and unicasting support - Plezi makes connecting your existing WebApp with your Plezi Websocket backend as easy as it gets.</p>
+
+<p>There are two easy ways to add Plezi websockets to your existing WebApp, depending on your needs and preferences:</p>
+
+<ol>
+<li>
+<p><strong>The super easy way - a Hybrid app</strong>:</p>
+
+<p>Plezi plays well with others, so you can add Plezi to your existing framework and let it catch any incoming websocket connections. Your application will still handle anything you didn't ask Plezi to handle (Plezi Websockets and routes will recieve priority, so your app can keep handling the 404 response).</p>
+</li>
+<li>
+<p><strong>The Placebo API</strong>:</p>
+
+<p>Plezi has a Placebo API, allowing you to add Plezi features without running a Plezi app.</p>
+
+<p>By adding the Plezi Placebo to your app, you can easily communicate between your existing app and a remote Plezi process/server. So, although websocket connections are made to a different server, your app can still send and recieve data through the websocket connection (using Redis).</p>
+</li>
+</ol>
+
+<h3>
+<a id="the-super-easy-way---a-hybrid-app" class="anchor" href="#the-super-easy-way---a-hybrid-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>The super easy way - a Hybrid app</h3>
+
+<p>The easiest way to add Plezi websockets to your existing application is to use <a href="https://github.com/boazsegev/GRHttp">GRHttp's</a> Rack adapter to run your Rack app, while Plezi will use GRHttp's native features (such as Websockets and HTTP streaming).</p>
+
+<p>You can eaither use your existing Plezi application or create a new mini plezi application inside your existing app folder using:</p>
+
+<pre><code>$   plezi mini appname
+</code></pre>
+
+<p>Next, add the <code>plezi</code> gem to your <code>Gemfile</code> and add the following line somewhere in your apps code:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>./appname/appname.rb<span class="pl-pds">'</span></span>
+<span class="pl-c1">Plezi</span>.start_rack</pre></div>
+
+<p>That's it! Now you can use the Plezi API and your existing application's API at the same time and they are both running on the same server.</p>
+
+<p>Plezi's routes will be attempted first, so that your app can keep handling the 404 (not found) error page.</p>
+
+<h3>
+<a id="the-plezi-placebo-api---talking-from-afar" class="anchor" href="#the-plezi-placebo-api---talking-from-afar" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Plezi Placebo API - talking from afar</h3>
+
+<p>To use Plezi and your App on different processes, without mixing them together, simply include the Plezi App in your existing app and call <code>Plezi.start_placebo</code> - now you can access all the websocket API that you want from your existing WebApp, but Plezi will not interfere with your WebApp in any way.</p>
+
+<p>For instance, add the following code to your environment setup on a Rails or Sinatra app:</p>
+
+<div class="highlight highlight-ruby"><pre>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>./my_plezi_app/environment.rb<span class="pl-pds">'</span></span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>./my_plezi_app/routes.rb<span class="pl-pds">'</span></span>
+
+<span class="pl-c"># # Make sure the following is already in your 'my_plezi_app/environment.rb' file:</span>
+<span class="pl-c"># ENV['PL_REDIS_URL'] = "redis://username:password@my.host:6379"</span>
+
+<span class="pl-c1">Plezi</span>.start_placebo</pre></div>
+
+<p>That's it!</p>
+
+<p>Plezi will automatically set up the Redis connections and pub/sub to connect your existing WebApp with Plezi's Websocket backend - which you can safely scale over processes or machines.</p>
+
+<p>Now you can use Plezi from withing your existing App's code. For example, if your Plezi app has a controller named <code>ClientPleziCtrl</code>, you might use:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># Demo a Rails Controller:</span>
+<span class="pl-k">class</span> <span class="pl-en">ClientsController<span class="pl-e"> &lt; ApplicationController</span></span>
+  <span class="pl-k">def</span> <span class="pl-en">update</span>
+     <span class="pl-c">#... your original logic here</span>
+     <span class="pl-smi">@client</span> <span class="pl-k">=</span> <span class="pl-c1">Client</span>.find(params[<span class="pl-c1">:id</span>])
+
+     <span class="pl-c"># now unicast data to your client on the websocket</span>
+     <span class="pl-c"># (assume his websocket uuid was saved in @client.ws_uuid)</span>
+
+     <span class="pl-c1">ClientPleziCtrl</span>.unicast <span class="pl-smi">@client</span>.ws_uuid, <span class="pl-c1">:method_name</span>, <span class="pl-smi">@client</span>.attributes
+
+     <span class="pl-c"># or broadcast data to your all your the clients currently connected</span>
+
+     <span class="pl-c1">ClientPleziCtrl</span>.broadcast <span class="pl-c1">:method_name</span>, <span class="pl-smi">@client</span>.attributes
+
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
+<p>Easy.</p>
+
+<p>- "But wait...", you might say to me, "How do we get information back FROM the back end?"</p>
+
+<p>Oh, that's easy too.</p>
+
+<p>With a few more lines of code, we can have the websocket connections <em>broadcast</em> back to us using the <code>Plezi::Placebo</code> API.</p>
+
+<p>In your Rails app, add the logic:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">MyReciever</span>
+    <span class="pl-k">def</span> <span class="pl-en">my_reciever_method</span> <span class="pl-smi">arg1</span>, <span class="pl-smi">arg2</span>, <span class="pl-smi">arg3</span>, <span class="pl-smi">arg4</span>...
+        <span class="pl-c"># your app's logic</span>
+    <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+<span class="pl-c1">Plezi</span>::<span class="pl-c1">Placebo</span>.<span class="pl-k">new</span> <span class="pl-c1">MyReciever</span></pre></div>
+
+<p>Plezi will now take your class and add mimick an IO connection (the Placebo connection) on it's GRHttp serever. This Placebo connection will answer the Redis broadcasts just as if your class was a websocket controller...</p>
+
+<p>On the Plezi side, use multicasting or unicasting (but not broadcasting), from ANY controller:</p>
+
+<div class="highlight highlight-ruby"><pre>
+<span class="pl-k">class</span> <span class="pl-en">ClientPleziCtrl</span>
+    <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-smi">data</span>
+        <span class="pl-c"># app logic here</span>
+        multicast <span class="pl-c1">:my_reciever_method</span>, arg1, arg2, arg3, arg4...
+    <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
+<p>That's it! Now you have your listening object... but be aware - to safely scale up this communication you might consider using unicasting instead of broadcasting.</p>
+
+<p>We recommend saving the uuid of the Rails process to a Redis key and picking it up from there.</p>
+
+<p>On your Rails app, add:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c">#...</span>
+<span class="pl-k">class</span> <span class="pl-en">MyReciever</span>
+    <span class="pl-k">def</span> <span class="pl-en">my_reciever_method</span> <span class="pl-smi">arg1</span>, <span class="pl-smi">arg2</span>, <span class="pl-smi">arg3</span>, <span class="pl-smi">arg4</span>...
+        <span class="pl-c"># ...</span>
+    <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+
+pl <span class="pl-k">=</span> <span class="pl-c1">Plezi</span>::<span class="pl-c1">Placebo</span>.<span class="pl-k">new</span> <span class="pl-c1">MyReciever</span>
+
+<span class="pl-c1">Plezi</span>.redis_connection.set <span class="pl-s"><span class="pl-pds">'</span>MainUUIDs<span class="pl-pds">'</span></span>, pl.uuid
+</pre></div>
+
+<p>In your Plezi app, use unicasting when possible:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">ClientPleziCtrl</span>
+    <span class="pl-k">def</span> <span class="pl-en">on_message</span> <span class="pl-smi">data</span>
+        <span class="pl-c"># app logic here</span>
+        main_uuid <span class="pl-k">=</span> <span class="pl-c1">Plezi</span>.redis_connection.get <span class="pl-s"><span class="pl-pds">'</span>MainUUIDs<span class="pl-pds">'</span></span>
+        unicast main_uuid, <span class="pl-c1">:my_reciever_method</span>, arg1, arg2, arg3, arg4... <span class="pl-k">if</span> main_uuid
+    <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+</pre></div>
+
+<h2>
 <a id="native-http-streaming-with-asynchronous-events" class="anchor" href="#native-http-streaming-with-asynchronous-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Native HTTP streaming with Asynchronous events</h2>
 
 <p>Plezi comes with native HTTP streaming support, alowing you to use Plezi Events and Timers to send an Asynchronous response.</p>
 
-<p>Let's make the classic 'Hello World' use HTTP Streaming and Asynchronous Plezi Events:</p>
+<p>Let's make the classic 'Hello World' use HTTP Streaming:</p>
 
 <div class="highlight highlight-ruby"><pre>        <span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>plezi<span class="pl-pds">'</span></span>
 
         <span class="pl-k">class</span> <span class="pl-en">Controller</span>
             <span class="pl-k">def</span> <span class="pl-en">index</span>
-                response.start_http_streaming
-                <span class="pl-c1">PL</span>.callback(response, <span class="pl-c1">:send</span>, <span class="pl-s"><span class="pl-pds">"</span>Hello World<span class="pl-pds">"</span></span>) { response.finish }
+                response.stream_async <span class="pl-k">do</span>
+                    sleep <span class="pl-c1">0.5</span>
+                    response <span class="pl-k">&lt;&lt;</span> <span class="pl-s"><span class="pl-pds">"</span>Hello <span class="pl-pds">"</span></span>;
+                    response.stream_async{ sleep <span class="pl-c1">0.5</span>; response <span class="pl-k">&lt;&lt;</span> <span class="pl-s"><span class="pl-pds">"</span>World<span class="pl-pds">"</span></span> }
+                <span class="pl-k">end</span>
                 <span class="pl-c1">true</span>
             <span class="pl-k">end</span>
         <span class="pl-k">end</span>
@@ -187,7 +307,9 @@ $ ./appname.rb # ( or: plezi s )
         listen
         route <span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span> , <span class="pl-c1">Controller</span></pre></div>
 
-<p>Notice the easy use of Asynchronous Events using the PL#callback method. The optional block passed to this method (<code>response.finish</code>) will be executed only after the asynchronous call for the response#send method with the "Hello World" argument has completed.</p>
+<p>Notice you can nest calls to the <code>response.stream_async</code> method, allowing you to breakdown big blocking tasks into smaller chunks. <code>response.stream_async</code> will return immediately, scheduling the task for background processing.</p>
+
+<p>You can also handle other tasks asynchronously using the <a href="http://www.rubydoc.info/gems/greactor">GReactor API</a>'s.</p>
 
 <p>More on asynchronous events and timers later.</p>
 
@@ -196,7 +318,7 @@ $ ./appname.rb # ( or: plezi s )
 
 <p>Plezi supports magic routes, in similar formats found in other systems, such as: <code>route "/:required/(:optional_with_format){[\\d]*}/(:optional)", Plezi::StubRESTCtrl</code>.</p>
 
-<p>Plezi assummes all simple string routes to be RESTful routes with the parameter <code>:id</code> ( <code>"/user" == "/user/(:id)"</code> ).</p>
+<p>Plezi assummes all simple routes to be RESTful routes with the parameter <code>:id</code> ( <code>"/user" == "/user/(:id)"</code> ).</p>
 
 <pre><code>require 'plezi'
 listen
@@ -219,7 +341,7 @@ route '/post/(:id)/(:revision){[\d]+\.[\d]+}/(:page_number)', Plezi::StubRESTCtr
 <h2>
 <a id="plezi-virtual-hosts" class="anchor" href="#plezi-virtual-hosts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Virtual Hosts</h2>
 
-<p>Plezi can be used to create virtual hosts for the same service:</p>
+<p>Plezi can be used to create virtual hosts for the same service, allowing you to handle different domains and subdomains with one app:</p>
 
 <pre><code>require 'plezi'
 listen
@@ -254,7 +376,7 @@ end
 <h2>
 <a id="plezi-logging" class="anchor" href="#plezi-logging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Logging</h2>
 
-<p>The Plezi module (also <code>PL</code>) has methods to help with logging as well as the support you already noticed for dynamic routes, dynamic services and more.</p>
+<p>The Plezi module (also <code>PL</code>) delegates to the GReactor methods, helping with logging as well as the support you already noticed for dynamic routes, dynamic services and more.</p>
 
 <p>Logging:</p>
 
@@ -262,6 +384,7 @@ end
 
 # simple logging of strings
 PL.info 'log info'
+GReactor.info 'This is the same, but more direct.'
 PL.warn 'log warning'
 PL.error 'log error'
 PL.fatal "log a fatal error (shuoldn't be needed)."
@@ -275,10 +398,12 @@ rescue Exception =&gt; e
 end
 </code></pre>
 
+<p>Please notice it is faster to use the GReactor API directly when using API that is delegated to GReactor.</p>
+
 <h2>
 <a id="plezi-events-and-timers" class="anchor" href="#plezi-events-and-timers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Events and Timers</h2>
 
-<p>The Plezi module (also <code>PL</code>) also has methods to help with asynchronous tasking, callbacks, timers and customized shutdown cleanup.</p>
+<p>The Plezi module (also <code>PL</code>) also delegates to the <a href="http://www.rubydoc.info/gems/greactor/GReactor">GReactor's API</a> to help with asynchronous tasking, callbacks, timers and customized shutdown cleanup.</p>
 
 <p>Asynchronous callbacks (works only while services are active and running):</p>
 
@@ -289,14 +414,17 @@ def my_shutdown_proc time_start
 end
 
 # shutdown callbacks
-PL.on_shutdown(Kernel, :my_shutdown_proc, Time.now) { puts "this will run after shutdown." }
-PL.on_shutdown() { puts "this will run too." }
+GReactor.on_shutdown(Kernel, :my_shutdown_proc, Time.now) { puts "this will run after shutdown." }
+GReactor.on_shutdown() { puts "this will run too." }
 
 # a timer
-PL.run_after 2, -&gt; {puts "this will wait 2 seconds to run... too late. for this example"}
+GReactor.run_after 2, -&gt; {puts "this will wait 2 seconds to run... too late. for this example"}
 
 # an asynchronous method call with an optional callback block
-PL.callback(Kernel, :puts, "Plezi will start eating our code once we exit terminal.") {puts 'first output finished'}
+GReactor.callback(Kernel, :puts, "Plezi will start eating our code once we exit terminal.") {puts 'first output finished'}
+
+GReactor.run_async {puts "notice that the background tasks will only start once the Plezi's engine is running."}
+GReactor.run_async {puts "exit Plezi to observe the shutdown callbacks."}
 </code></pre>
 
 <h2>
@@ -372,9 +500,58 @@ route "/" , Controller
 <p>Please notice that there are some differences between the two. Proc routes less friedly, but plenty powerful and are great for custom 404 error handling.</p>
 
 <h2>
+<a id="oauth2-and-other-helpers" class="anchor" href="#oauth2-and-other-helpers" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth2 and other Helpers</h2>
+
+<p>Plezi has a few helpers that help with common tasks.</p>
+
+<p>For instance, Plezi has a built in controller that allows you to add social authentication using Google, Facebook
+and and other OAuth2 authentication service. For example:</p>
+
+<pre><code>require 'plezi'
+
+class Controller
+    def index
+        flash[:login] ? "You are logged in as #{flash[:login]}" : "You aren't logged in. Please visit one of the following:\n\n* #{request.base_url}#{Plezi::OAuth2Ctrl.url_for :google}\n\n* #{request.base_url}#{Plezi::OAuth2Ctrl.url_for :facebook}"
+    end
+end
+
+# set up the common social authentication variables for automatic Plezi::OAuth2Ctrl service recognition.
+ENV["FB_APP_ID"] ||= "facebook_app_id / facebook_client_id"
+ENV["FB_APP_SECRET"] ||= "facebook_app_secret / facebook_client_secret"
+ENV['GOOGLE_APP_ID'] = "google_app_id / google_client_id"
+ENV['GOOGLE_APP_SECRET'] = "google_app_secret / google_client_secret"
+
+require 'plezi/oauth'
+
+# manually setup any OAuth2 service (we'll re-setup facebook as an example):
+Plezi::OAuth2Ctrl.register_service(:facebook, app_id: ENV['FB_APP_ID'],
+                app_secret: ENV['FB_APP_SECRET'],
+                auth_url: "https://www.facebook.com/dialog/oauth",
+                token_url: "https://graph.facebook.com/v2.3/oauth/access_token",
+                profile_url: "https://graph.facebook.com/v2.3/me",
+                scope: "public_profile,email") if ENV['FB_APP_ID'] &amp;&amp; ENV['FB_APP_SECRET']
+
+
+listen
+
+create_auth_shared_route do |service_name, token, remote_user_id, remote_user_email, remote_response|
+    # we will create a temporary cookie storing a login message. replace this code with your app's logic
+    flash[:login] = "#{remote_response['name']} (#{remote_user_email}) from #{service_name}"
+end
+
+route "/" , Controller
+
+exit
+</code></pre>
+
+<p>Plezi has a some more goodies under the hood.</p>
+
+<p>Whether such goodies are part of the Plezi-App Template (such as rake tasks for ActiveRecord without Rails) or part of the Plezi Framework core (such as descried in the Plezi::ControllerMagic documentation: #flash, #url_for, #render, #send_data, etc'), these goodies are fun to work with and make completion of common tasks a breeze.</p>
+
+<h2>
 <a id="plezi-settings" class="anchor" href="#plezi-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plezi Settings</h2>
 
-<p>Plezi is ment to be very flexible. please take a look at the Plezi Module for settings you might want to play with (max_threads, idle_sleep, create_logger) or any monkey patching you might enjoy.</p>
+<p>Plezi is meant to be very flexible. please take a look at the Plezi Module for settings you might want to play with (max_threads, idle_sleep, create_logger) or any monkey patching you might enjoy.</p>
 
 <p>Feel free to fork or contribute. right now I am one person, but together we can make something exciting that will help us enjoy Ruby in this brave new world and (hopefully) set an example that will induce progress in the popular mainstream frameworks such as Rails and Sinatra.</p>
 
@@ -388,24 +565,14 @@ route "/" , Controller
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create a new Pull Request</li>
 </ol>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/boazsegev/plezi/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/boazsegev/plezi/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/boazsegev/plezi">Plezi</a> is maintained by <a href="https://github.com/boazsegev">boazsegev</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/boazsegev/plezi"></a> is maintained by <a href="https://github.com/boazsegev">boazsegev</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
   
   </body>
